@@ -12,13 +12,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Update markdown tocs
-      uses: technote-space/toc-generator@v4
-      with:
-       COMMIT_MESSAGE: 'docs: update TOC'
-       FOLDING: true
-       GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-    
     - name: Update terrafom docs
       uses: terraform-docs/gh-actions@v1.0.0
       with:
@@ -30,6 +23,12 @@ runs:
       env:
         FILE: '${{ inputs.TF_DIR}}/README.md'
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-
+    
+    - name: Update markdown tocs
+      uses: technote-space/toc-generator@v4
+      with:
+       COMMIT_MESSAGE: 'docs: update TOC'
+       FOLDING: true
+       GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
 
