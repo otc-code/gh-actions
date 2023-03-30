@@ -1,0 +1,4 @@
+resource_group_name  = "otc-backend-action-test-tfstate-rg"
+storage_account_name = "otcbat0815"
+container_name       = "otc"
+key                  = "otc-backend-action-test.tfstate"

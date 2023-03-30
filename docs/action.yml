@@ -1,0 +1,27 @@
+name: 'Update Documentation'
+description: 'Action for automatic documentation updates'
+
+inputs:
+  TF_DIR:
+    description: 'Working directory for action'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Update markdown tocs
+      if: ${{ inputs.MARKDOWN }}
+      uses: technote-space/toc-generator@v4
+      with:
+       COMMIT_MESSAGE: 'docs: update TOC'
+       FOLDING: true
+    
+    - name: Update terrafom docs
+      uses: terraform-docs/gh-actions@v1.0.0
+      with:
+        working-dir: ${{ inputs.TF_DIR }}
+
+
+
+

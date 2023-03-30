@@ -1,0 +1,3 @@
+bucket = "devopscube-states"
+prefix = "demo"
+credentials = "service-account.json"

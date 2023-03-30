@@ -1,0 +1,36 @@
+name: 'Action for Terraform'
+description: 'Action for terraform'
+
+inputs:
+  TF_DIR:
+    description: 'relative path to terraform root dir'
+    required: true
+  GITHUB_TOKEN:
+    description: 'GITHUB Token for terraform init'
+    required: true
+  TERRAFORM_ACTION:
+    description: 'Terraform Action to execute'
+    required: false  
+    default: 'version'
+  TF_VARS_FILE:
+    description: 'tfvars file'
+    required: false
+  OTC_TF_VARS_FILE:
+    description: 'tfvars file'
+    required: false
+runs:
+  using: "composite"
+  steps:
+
+    - name: terraform Action
+      run: "bash ${{ github.action_path }}/scripts/terraform.sh"
+      shell: bash
+      env:
+        TF_DIR: ${{ inputs.TF_DIR}}
+        TERRAFORM_ACTION: ${{ inputs.TERRAFORM_ACTION }}
+        TF_BACKEND_FILE: ${{ inputs.TF_BACKEND_FILE }}
+        TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
+        OTC_TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+
+

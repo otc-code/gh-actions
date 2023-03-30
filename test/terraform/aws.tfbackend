@@ -1,0 +1,5 @@
+region         = "eu-central-1"
+bucket         = "otc-backend-action-test-tfstate"
+dynamodb_table = "otc-backend-action-test-tfstate.locks"
+key            = "otc/otc-backend-action-test.tfstate"
+encrypt        = true

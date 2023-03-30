@@ -1,0 +1,153 @@
+name: OTC Test - test actions
+on:
+  workflow_dispatch:
+  # pull_request:
+  # push:
+  #   branches:
+  #     - 'main'
+
+permissions:
+  contents: read
+  id-token: write
+  checks: write
+  issues: read
+  pull-requests: write
+
+concurrency:
+  group: otc-test
+
+jobs:
+  test:
+    name: OTC Actions Automatic Tests
+    environment: dev
+    runs-on: [otc-ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ORG_GITHUB_TOKEN }}
+      - name: AWS login
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume:  ${{ secrets.AWS_ASSUME_ROLE }}
+          role-session-name: otc-action
+          aws-region: 'eu-central-1'
+
+      # - name: GCP Login
+      #   uses: google-github-actions/auth@v0
+      #   with:
+      #     credentials_json: ${{ secrets.GCP_SA_KEY }}
+      #     cleanup_credentials: false
+      # 
+      # - name: Test - ToC
+      #   uses: ./docs/
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+
+      # - name: Terraform version
+      #   uses: ./terraform/
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+      # 
+      # - name: Terraform fmt
+      #   uses: ./terraform/
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+      #     TERRAFORM_ACTION: 'fmt'
+      #     GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_TOKEN }}
+      # 
+      - name: Terraform fmt_check
+        uses: ./terraform/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/terraform'
+          TERRAFORM_ACTION: 'fmt_check' 
+      
+      - name: Terraform init
+        uses: ./terraform/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/terraform'
+          TERRAFORM_ACTION: 'init'
+          GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_TOKEN }}
+      
+      
+      
+      - name: Terraform validate
+        uses: ./terraform/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/terraform'
+          TERRAFORM_ACTION: 'validate'
+      
+      - name: Terraform compliance
+        uses: ./terraform/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/terraform'
+          TERRAFORM_ACTION: 'compliance'
+      
+      - name: Terraform security
+        uses: ./terraform/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/terraform'
+          TERRAFORM_ACTION: 'security'
+
+      - name: run kics Scan
+        uses: checkmarx/kics-github-action@v1.6.3
+        with:
+          path: '${{ github.workspace }}/azr-storage'
+          ignore_on_exit: results
+          cloud_provider: 'aws, azure, gcp'
+          token: ${{ secrets.ORG_GITHUB_TOKEN }}
+
+      - name: run kics Scan
+        uses: checkmarx/kics-github-action@v1.6.3
+        with:
+          path: '${{ github.workspace }}/test/terraform'
+          ignore_on_exit: results
+          cloud_provider: 'aws, azure, gcp'
+          token: ${{ secrets.ORG_GITHUB_TOKEN }}
+
+
+    
+      # - name: Publish Test Results
+      #   uses: EnricoMi/publish-unit-test-result-action@v2
+      #   id: tests
+      #   if: always()
+      #   with:
+      #     junit_files: '${{ github.workspace }}/test/terraform/.results/*.xml'
+      #     check_name: 'terraform'
+      #     fail_on: 'errors'
+      #     job_summary: true
+      # 
+      # - name: Azure login
+      #   uses: azure/login@v1
+      #   with:
+      #     client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      # 
+      # - name: AWS login
+      #   uses: aws-actions/configure-aws-credentials@v2
+      #   with:
+      #     role-to-assume:  ${{ secrets.AWS_ASSUME_ROLE }}
+      #     role-session-name: otc-action
+      #     aws-region: 'eu-central-1'
+
+
+      # - name: Terraform plan
+      #   uses: ./terraform/
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+      #     TERRAFORM_ACTION: 'plan'
+
+      # - name: Terraform plan with tfvars
+      #   uses: ./terraform/
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+      #     TERRAFORM_ACTION: 'plan'
+      #     TF_VARS_FILE: '${{ github.workspace }}/test/terraform/tfvars/customer.tfvars'
+      # 
+      # - name: Terraform plan with otc_tfvars
+      #   uses: ./terraform/
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+      #     TERRAFORM_ACTION: 'plan'
+      #     TF_VARS_FILE: '${{ github.workspace }}/test/terraform/tfvars/customer.tfvars'
+      #     OTC_TF_VARS_FILE: '${{ github.workspace }}/test/terraform/tfvars/otc.tfvars'
