@@ -24,4 +24,4 @@ jobs:
       - name: Test - Docs
         uses: ./docs/
         with:
-          TF_DIR: '${{ github.workspace }}/test/docs
+          TF_DIR: '${{ github.workspace }}/test/docs'
