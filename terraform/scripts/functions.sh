@@ -7,7 +7,6 @@ ERR='\033[0;31m✗ '
 NC='\033[0m'
 
 mkdir -p $RESULTS_DIR
-
 function hr(){
     for i in {1..125}; do echo -n -; done
     echo ""

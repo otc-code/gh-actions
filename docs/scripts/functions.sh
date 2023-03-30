@@ -6,8 +6,6 @@ INF='\033[0;33m'
 ERR='\033[0;31m✗ '
 NC='\033[0m'
 
-mkdir -p $RESULTS_DIR
-
 function hr(){
     for i in {1..125}; do echo -n -; done
     echo ""
@@ -19,9 +17,7 @@ function show_info(){
     echo -e "♎ Repository: ${INF}$GITHUB_REPOSITORY${NC} on $GITHUB_REF_NAME"
     echo -e "☸ Running script: ${INF}'`basename $0`'${NC} in $SCRIPT_DIRECTORY"
     hr
-    echo -e "- TF_DIR: ${INF}$TF_DIR${NC}"
-
-    #TERRAFORM_COMMAND
+    echo -e "- FILE: ${INF}$FILE${NC}"
     if [[ -z "$DEBUG" ]]; then
         DEBUG="false"
         echo -e "Debug: ${INF}Disabled${NC}"
@@ -32,5 +28,33 @@ function show_info(){
         set -x
 
     fi
+    if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+        echo -e "  * ${INF}PULL_REQUEST${NC}: Readme will not updated on PR!"
+        exit 0
+    fi
+}
 
+get_github_info(){
+    STATUS="draft"
+    VERSION=$GITHUB_REF_NAME
+    DATE="`date`"
+    if [[ "$GITHUB_REF_NAME" == "main" ]]; then
+      STATUS="approved"
+    fi
+    
+
+}
+
+check_markers(){
+    grep "$START" "$FILE" > /dev/null
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        echo -e "  * ${INF}Update README${NC}: $START not found in $FILE, skipping."
+        exit 0
+    fi
+
+    grep "$END" "$FILE" &> /dev/null
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        echo -e "  * ${INF}Update README${NC}: $END not found in $FILE, skipping."
+        exit 0
+    fi
 }

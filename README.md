@@ -19,12 +19,18 @@
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+<div class="pull-right">Dieser Text wird in der linken Spalte ausgegeben.</div>
+
 # Overview
 
 Contains needed Github action for OTC
 
 -   docs updater
 -   
+
+| Status  | Version  | last updated |
+| ------- | -------- | ------------ |
+| $STATUS | $VERSION | $DATE        |
 
 ## head 2
 
