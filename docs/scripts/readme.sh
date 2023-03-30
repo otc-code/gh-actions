@@ -36,3 +36,4 @@ get_github_info
 header
 footer
 cp tmp.local $FILE
+git_push
