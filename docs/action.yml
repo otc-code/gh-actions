@@ -28,7 +28,7 @@ runs:
       uses: technote-space/toc-generator@v4
       with:
        COMMIT_MESSAGE: 'docs: update TOC'
-       TARGET_PATHS: [${{ inputs.TF_DIR}}]
+       TARGET_PATHS: 'README*.md'
        FOLDING: true
        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
