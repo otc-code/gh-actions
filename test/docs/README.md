@@ -8,7 +8,7 @@
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-# Hier die Beschreibung...
+## Hier die Beschreibung...
 
 ### Test 1
 
