@@ -21,7 +21,7 @@ runs:
       run: "bash ${{ github.action_path }}/scripts/readme.sh"
       shell: bash
       env:
-        FILE: '${{ inputs.TF_DIR}}/README.md'
+        FILE: '${{ inputs.TF_DIR}}/README*.md'
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
     
     - name: Update markdown tocs
