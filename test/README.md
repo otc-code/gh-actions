@@ -1,5 +1,3 @@
-# /README.md Test file for doc updater
-
 <!-- OTC-HEADER -->
 
 <!-- OTC-HEADER -->

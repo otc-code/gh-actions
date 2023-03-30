@@ -1,4 +1,4 @@
-# /README.md Test file for doc updater
+# README.md - sample
 
 <!-- OTC-HEADER-START -->
 
@@ -8,15 +8,11 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# HEAD 1
+## Module documentation
 
-## HEAD 2
+<!-- BEGIN_TF_DOCS -->
 
-### HEAD 3
-
-#### HEAD 4
-
-# HEAD 5
+<!-- END_TF_DOCS -->
 
 <!-- OTC-FOOTER-START -->
 

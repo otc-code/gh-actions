@@ -21,7 +21,7 @@ jobs:
       - name: Environment
         run: "export"
         shell: bash
-      # - name: Test - ToC
-      #   uses: ./docs/
-      #   with:
-      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+      - name: Test - Docs
+        uses: ./docs/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/docs

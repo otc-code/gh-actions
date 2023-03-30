@@ -37,12 +37,6 @@ jobs:
       #   with:
       #     credentials_json: ${{ secrets.GCP_SA_KEY }}
       #     cleanup_credentials: false
-      # 
-      # - name: Test - ToC
-      #   uses: ./docs/
-      #   with:
-      #     TF_DIR: '${{ github.workspace }}/test/terraform'
-
       # - name: Terraform version
       #   uses: ./terraform/
       #   with:
