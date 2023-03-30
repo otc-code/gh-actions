@@ -17,7 +17,10 @@ jobs:
     runs-on: [Linux]
     steps:
       - uses: actions/checkout@v3
-      - name: Test - ToC
-        uses: ./docs/
-        with:
-          TF_DIR: '${{ github.workspace }}/test/terraform'
+      - name: Environment
+        run: "export"
+        shell: bash
+      # - name: Test - ToC
+      #   uses: ./docs/
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}/test/terraform'

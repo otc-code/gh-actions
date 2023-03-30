@@ -1,4 +1,4 @@
-name: OTC Test - test actions
+name: OTC Test - terraform
 on:
   workflow_dispatch:
   # pull_request:
