@@ -4,8 +4,6 @@ on:
   pull_request:
   release:
     types: [published]
-on:
-
   push:
     branches:
       - '*'
