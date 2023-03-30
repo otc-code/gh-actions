@@ -58,3 +58,28 @@ check_markers(){
         exit 0
     fi
 }
+
+git_push(){
+    git config --global user.name github-actions
+    git config --global user.email github-actions@github.com
+
+    git diff --exit-code &> OUT.local &> /dev/null
+    if [[ $? -eq 0 ]]; then
+        echo -e "${OK}git diff:${NC} nothing to commit"
+    else
+        echo -e "${OK}git status ($GITHUB_REF_NAME):${NC} \n`git status --short`"
+
+        git commit $FILE -m "docs: update Header/Footer - $GITHUB_EVENT_NAME, $GITHUB_WORKFLOW"
+        git push
+        if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+            echo -e "  * ${INF}Push rejected${NC}: Local branch not up to date, will pull again !"
+            git pull
+            git push
+            if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+                echo -e "  * ${ERR}Push rejected${NC}: Check github token permission !"
+            fi
+        else
+            echo -e "${OK}git push:${NC} $MESSAGE"
+        fi
+    fi
+}
