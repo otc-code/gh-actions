@@ -10,12 +10,13 @@ header(){
     TMP="header.local"
     echo "<!-- OTC-HEADER-START -->" > $TMP
     echo "# $GITHUB_REPOSITORY" >> $TMP
-    npx markdown-toc $FILE > toc.local
     echo "<details>" >> $TMP
-    echo "<summary>Table of content</summary>" >> $TMP
-    echo -n >> $TMP
+    echo "<summary>Table of contents</summary>" >> $TMP
+    echo >> $TMP
+    npx markdown-toc $FILE > toc.local
+    echo >> $TMP
     cat toc.local >> $TMP
-    echo -n >> $TMP
+    echo >> $TMP
     echo "</details>" >> $TMP
     echo -n >> $TMP
     echo "<!-- OTC-HEADER-END -->" >> $TMP
