@@ -32,6 +32,11 @@ footer(){
     sed -e '/'"$START"'/,/'"$END"'/!b' -e '/'"$END"'/!d;r '$TMP'' -e 'd' $FILE > tmp.local
 }
 
+update_toc(){
+  doctoc $FILE
+}
+
+update_toc
 get_github_info
 header
 footer

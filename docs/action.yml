@@ -24,12 +24,13 @@ runs:
         FILE: '${{ inputs.TF_DIR}}/README.md'
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
     
-    - name: Update markdown tocs
-      uses: technote-space/toc-generator@v4
-      with:
-       COMMIT_MESSAGE: 'docs: update TOC'
-       FOLDING: true
-       TARGET_PATHS: '.'
-       GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+    # - name: Update markdown tocs
+    #   uses: technote-space/toc-generator@v4
+    #   with:
+    #    COMMIT_MESSAGE: 'docs: update TOC'
+    #    FOLDING: true
+    #    MAX_HEADER_LEVEL: 3
+    #    TARGET_PATHS: '.'
+    #    GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
 
