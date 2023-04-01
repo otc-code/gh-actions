@@ -30,10 +30,9 @@ footer(){
     check_markers
     TMP="footer.local"
     echo "<!-- OTC-FOOTER-START -->" > $TMP
-    echo -n >> $TMP
-    echo "## Terraform"
-    echo "<!-- BEGIN_TF_DOCS -->"
-    echo "<!-- END_TF_DOCS -->"
+    echo "## Terraform" $TMP
+    echo "<!-- BEGIN_TF_DOCS -->" $TMP
+    echo "<!-- END_TF_DOCS -->" $TMP
     echo "---" >> $TMP
     echo "<div class="pull-right">Updated: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID</div>" >> $TMP
     echo "<!-- OTC-FOOTER-END -->" >> $TMP
