@@ -12,25 +12,13 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Update terrafom docs
-      uses: terraform-docs/gh-actions@v1.0.0
-      with:
-        working-dir: ${{ inputs.TF_DIR }}
 
-    - name: Update README
+    - name: Update Docs
       run: "bash ${{ github.action_path }}/scripts/readme.sh"
       shell: bash
       env:
         FILE: '${{ inputs.TF_DIR}}/README.md'
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
     
-    # - name: Update markdown tocs
-    #   uses: technote-space/toc-generator@v4
-    #   with:
-    #    COMMIT_MESSAGE: 'docs: update TOC'
-    #    FOLDING: true
-    #    MAX_HEADER_LEVEL: 3
-    #    TARGET_PATHS: '.'
-    #    GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
 

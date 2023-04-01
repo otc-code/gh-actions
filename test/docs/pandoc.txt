@@ -1,0 +1,21 @@
+<!-- OTC-HEADER-START -->
+
+<!-- OTC-HEADER-END -->
+
+$if(toc)$
+$toc$
+$endif$
+
+$body$
+
+
+* * *
+## Terrafom documentation
+
+<!-- BEGIN_TF_DOCS -->
+
+<!-- END_TF_DOCS -->
+
+<!-- OTC-FOOTER-START -->
+
+<!-- OTC-FOOTER-END -->

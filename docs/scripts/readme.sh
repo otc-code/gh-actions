@@ -10,10 +10,12 @@ header(){
     TMP="header.local"
     echo "<!-- OTC-HEADER-START -->" > $TMP
     echo "# $GITHUB_REPOSITORY" >> $TMP
+    npx markdown-toc $FILE > toc.local
+    echo "<details>" >> $TMP
+    echo "<summary>Table of content</summary>" >> $TMP
+    cat toc.local >> $TMP
+    echo "</details>" >> $TMP
     echo -n >> $TMP
-    echo "| Status | Version | last updated |" >> $TMP
-    echo "| ------ | ------- | ------------ |" >> $TMP
-    echo "| $STATUS | $VERSION | $DATE      |" >> $TMP
     echo "<!-- OTC-HEADER-END -->" >> $TMP
     sed -e '/'"$START"'/,/'"$END"'/!b' -e '/'"$END"'/!d;r '$TMP'' -e 'd' $FILE > tmp.local
     cp tmp.local $FILE
@@ -32,11 +34,7 @@ footer(){
     sed -e '/'"$START"'/,/'"$END"'/!b' -e '/'"$END"'/!d;r '$TMP'' -e 'd' $FILE > tmp.local
 }
 
-update_toc(){
-  doctoc --github $FILE 
-}
 
-update_toc
 get_github_info
 header
 footer
