@@ -19,6 +19,3 @@ runs:
       env:
         FILE: '${{ inputs.TF_DIR}}/README.md'
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-    
-
-
