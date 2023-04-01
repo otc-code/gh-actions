@@ -29,6 +29,7 @@ runs:
       with:
        COMMIT_MESSAGE: 'docs: update TOC'
        FOLDING: true
+       TARGET_PATHS: '${{ inputs.GITHUB_TOKEN }}/README*.md'
        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
 
