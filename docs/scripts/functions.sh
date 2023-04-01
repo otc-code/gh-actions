@@ -36,7 +36,7 @@ function show_info(){
 
 get_github_info(){
     STATUS="draft"
-    VERSION=$GITHUB_REF_NAME
+    VERSION="branch: $GITHUB_REF_NAME"
     DATE="` date +"%d.%m.%Y"`"
     if [[ "$GITHUB_REF_NAME" == "main" ]]; then
       STATUS="approved"
