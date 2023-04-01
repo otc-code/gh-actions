@@ -29,7 +29,7 @@ runs:
       with:
        COMMIT_MESSAGE: 'docs: update TOC'
        FOLDING: true
-       TARGET_PATHS: '${{ inputs.TF_DIR }}'
+       TARGET_PATHS: '${{ inputs.TF_DIR }}/*.md'
        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
 
