@@ -33,7 +33,7 @@ footer(){
 }
 
 update_toc(){
-  doctoc $FILE
+  doctoc --github $FILE 
 }
 
 update_toc
