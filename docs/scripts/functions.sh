@@ -41,8 +41,6 @@ get_github_info(){
     if [[ "$GITHUB_REF_NAME" == "main" ]]; then
       STATUS="approved"
     fi
-    
-
 }
 
 check_markers(){
