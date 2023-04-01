@@ -2,7 +2,7 @@
 
 <!-- TOC -->
 
-<details open>
+<details>
 <summary>Table of contents</summary>
 
 -   [Overview](#overview)
