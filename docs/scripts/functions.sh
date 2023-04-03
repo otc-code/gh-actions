@@ -90,7 +90,7 @@ git_push(){
           git push --delete origin "$GITHUB_REF_NAME"
         fi
         
-        git push
+        git push origin "$GITHUB_REF_NAME"
         if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
             echo -e "  * ${INF}Push rejected${NC}: Local branch not up to date, will pull again !"
             git pull
