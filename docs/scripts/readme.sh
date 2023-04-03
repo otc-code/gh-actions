@@ -22,7 +22,6 @@ header(){
     echo -n >> $TMP
     echo "<!-- OTC-HEADER-END -->" >> $TMP
     sed -e '/'"$START"'/,/'"$END"'/!b' -e '/'"$END"'/!d;r '$TMP'' -e 'd' $FILE > tmp.local
-    cp tmp.local $FILE
 }
 
 footer(){
