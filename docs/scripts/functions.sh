@@ -91,6 +91,9 @@ git_push(){
     fi
     if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
       git push --delete origin :$GITHUB_REF
-      git push origin :$GITHUB_REF
+      git tag --delete $GITHUB_REF_NAME
+      git tag GITHUB_REF_NAME
+      git push
+      
     fi
 }
