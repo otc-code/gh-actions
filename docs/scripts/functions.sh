@@ -80,8 +80,9 @@ git_push(){
         git commit $FILE -m "$MESSAGE"
         if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
           echo -e "${OK}Release:${NC} moving Tag Version"
-          git push --delete origin :$GITHUB_REF
+          git push --delete origin $GITHUB_REF_NAME
           git tag -d $GITHUB_REF_NAME
+          git tag -l
           git commit -m "Delete tag"
           git tag $GITHUB_REF_NAME
         fi
