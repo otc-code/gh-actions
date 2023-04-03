@@ -44,4 +44,4 @@ footer(){
 get_github_info
 header
 footer
-cat $FILE
+git_push
