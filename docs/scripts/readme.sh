@@ -10,29 +10,38 @@ header(){
     TMP="header.local"
     echo "<!-- OTC-HEADER-START -->" > $TMP
     echo "# $GITHUB_REPOSITORY" >> $TMP
+    echo "<p align="right">⚙ $STATUS, $DATE ($VERSION)</p>" >> $TMP
+    echo "<details>" >> $TMP
+    echo "<summary>Table of contents</summary>" >> $TMP
+    echo >> $TMP
+    npx markdown-toc $FILE > toc.local
+    echo >> $TMP
+    cat toc.local >> $TMP
+    echo >> $TMP
+    echo "</details>" >> $TMP
     echo -n >> $TMP
-    echo "| Status | Version | last updated |" >> $TMP
-    echo "| ------ | ------- | ------------ |" >> $TMP
-    echo "| $STATUS | $VERSION | $DATE      |" >> $TMP
     echo "<!-- OTC-HEADER-END -->" >> $TMP
     sed -e '/'"$START"'/,/'"$END"'/!b' -e '/'"$END"'/!d;r '$TMP'' -e 'd' $FILE > tmp.local
     cp tmp.local $FILE
-}
-
+  }
 footer(){
     START="<!-- OTC-FOOTER-START -->"
     END="<!-- OTC-FOOTER-END -->"
     check_markers
     TMP="footer.local"
-    echo "<!-- OTC-FOOTER-START -->" > $TMP
-    echo -n >> $TMP
+    echo "<!-- OTC-FOOTER-START -->" >> $TMP
+    echo "## Terraform" >> $TMP
+    echo "<!-- BEGIN_TF_DOCS -->" >> $TMP
+    echo "<!-- END_TF_DOCS -->" >> $TMP
     echo "---" >> $TMP
-    echo "<div class="pull-right">Updated: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID</div>" >> $TMP
+    echo "<p align="right">Updated: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID</p>" >> $TMP
     echo "<!-- OTC-FOOTER-END -->" >> $TMP
     sed -e '/'"$START"'/,/'"$END"'/!b' -e '/'"$END"'/!d;r '$TMP'' -e 'd' $FILE > tmp.local
+    cp tmp.local $FILE
 }
+
 
 get_github_info
 header
 footer
-cp tmp.local $FILE
+git_push

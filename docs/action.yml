@@ -5,23 +5,17 @@ inputs:
   TF_DIR:
     description: 'Working directory for action'
     required: true
+  GITHUB_TOKEN:
+    description: 'GITHUB Token'
+    required: true
 
 runs:
   using: "composite"
   steps:
 
-    - name: Update markdown tocs
-      if: ${{ inputs.MARKDOWN }}
-      uses: technote-space/toc-generator@v4
-      with:
-       COMMIT_MESSAGE: 'docs: update TOC'
-       FOLDING: true
-    
-    - name: Update terrafom docs
-      uses: terraform-docs/gh-actions@v1.0.0
-      with:
-        working-dir: ${{ inputs.TF_DIR }}
-
-
-
-
+    - name: Update Docs
+      run: "bash ${{ github.action_path }}/scripts/readme.sh"
+      shell: bash
+      env:
+        FILE: '${{ inputs.TF_DIR}}/README.md'
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}

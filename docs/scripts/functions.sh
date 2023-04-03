@@ -36,13 +36,11 @@ function show_info(){
 
 get_github_info(){
     STATUS="draft"
-    VERSION=$GITHUB_REF_NAME
-    DATE="`date`"
+    VERSION="branch: $GITHUB_REF_NAME"
+    DATE="` date +"%d.%m.%Y"`"
     if [[ "$GITHUB_REF_NAME" == "main" ]]; then
       STATUS="approved"
     fi
-    
-
 }
 
 check_markers(){
@@ -56,5 +54,32 @@ check_markers(){
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
         echo -e "  * ${INF}Update README${NC}: $END not found in $FILE, skipping."
         exit 0
+    fi
+}
+
+git_push(){
+    git config --global user.name github-actions
+    git config --global user.email github-actions@github.com
+
+    git diff --exit-code &> OUT.local &> /dev/null
+    if [[ $? -eq 0 ]]; then
+        echo -e "${OK}git diff:${NC} nothing to commit"
+    else
+        echo -e "${OK}git status ($GITHUB_REF_NAME):${NC} \n`git status --short`"
+        MESSAGE="docs: update Header/Footer - $GITHUB_EVENT_NAME, $GITHUB_WORKFLOW"
+        echo -e "${OK}git commit ($GITHUB_REF_NAME):${NC} $MESSAGE"
+        
+        git commit $FILE -m "$MESSAGE"
+        git push
+        if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+            echo -e "  * ${INF}Push rejected${NC}: Local branch not up to date, will pull again !"
+            git pull
+            git push
+            if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+                echo -e "  * ${ERR}Push rejected${NC}: Check github token permission !"
+            fi
+        else
+            echo -e "${OK}git push:${NC} $MESSAGE"
+        fi
     fi
 }

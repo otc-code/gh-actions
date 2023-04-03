@@ -8,15 +8,6 @@
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-<details>
-<summary>Table of Contents</summary>
-
--   [Overview](#overview)
-    -   [head 2](#head-2)
-        -   [head 3](#head-3)
-            -   [head 4](#head-4)
-
-</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 <div class="pull-right">Dieser Text wird in der linken Spalte ausgegeben.</div>

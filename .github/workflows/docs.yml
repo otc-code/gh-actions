@@ -2,13 +2,14 @@ name: OTC Test - docs
 on:
   workflow_dispatch:
   pull_request:
+  release:
+    types: [published]
   push:
     branches:
-      - 'main'
+      - '*'
 
 permissions:
   contents: write
-
 
 jobs:
   test:
@@ -17,10 +18,11 @@ jobs:
     runs-on: [Linux]
     steps:
       - uses: actions/checkout@v3
-      - name: Environment
-        run: "export"
-        shell: bash
-      # - name: Test - ToC
-      #   uses: ./docs/
-      #   with:
-      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: export
+      - name: Test - Docs
+        uses: ./docs/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/docs'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
