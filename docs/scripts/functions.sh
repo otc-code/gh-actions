@@ -89,5 +89,8 @@ git_push(){
             echo -e "${OK}git push:${NC} $MESSAGE"
         fi
     fi
-    
+    if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
+      git push --delete origin :$GITHUB_REF
+      git push origin :$GITHUB_REF
+    fi
 }
