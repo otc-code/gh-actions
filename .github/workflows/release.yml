@@ -1,10 +1,10 @@
 name: OTC Test - Release
 on:
   push:
-    branches:
+    branch:
       - main
     tags:
-      - "*"
+      - 'v*'
 jobs:
   test:
     name: OTC test - Release
