@@ -32,16 +32,23 @@ function show_info(){
         echo -e "  * ${INF}PULL_REQUEST${NC}: Readme will not updated on PR!"
         exit 0
     fi
+    if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
+    echo -e "  * ${INF}RELEASE${NC}: Updates will happen on main branch!"
+    git checkout main
+    fi
 }
 
 get_github_info(){
     STATUS="draft"
-    VERSION="branch: $GITHUB_REF_NAME"
+    VERSION="$GITHUB_REF_NAME"
     DATE="` date +"%d.%m.%Y"`"
     if [[ "$GITHUB_REF_NAME" == "main" ]]; then
       STATUS="approved"
     fi
-}
+    if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
+      STATUS="released"
+    fi
+  }
 
 check_markers(){
     grep "$START" "$FILE" > /dev/null
@@ -82,4 +89,5 @@ git_push(){
             echo -e "${OK}git push:${NC} $MESSAGE"
         fi
     fi
+    
 }
