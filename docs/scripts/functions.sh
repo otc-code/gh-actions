@@ -81,7 +81,7 @@ git_push(){
         if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
           echo -e "${OK}Release:${NC} moving Tag Version"
           git push --delete origin $GITHUB_REF_NAME
-          git push --delete $GITHUB_REF_NAME
+          git tag --delete $GITHUB_REF_NAME
           git tag -l
           git tag $GITHUB_REF_NAME
           git tag -l
