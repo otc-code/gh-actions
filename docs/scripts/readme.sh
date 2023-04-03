@@ -10,7 +10,7 @@ header(){
     TMP="header.local"
     echo "<!-- OTC-HEADER-START -->" > $TMP
     echo "# $GITHUB_REPOSITORY" >> $TMP
-    echo "$STATUS, $DATE ($VERSION)" $TMP
+    echo "$STATUS, $DATE ($VERSION)" >> $TMP
     echo "<details>" >> $TMP
     echo "<summary>Table of contents</summary>" >> $TMP
     echo >> $TMP
