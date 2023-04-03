@@ -72,6 +72,11 @@ git_push(){
     if [[ $? -eq 0 ]]; then
         echo -e "${OK}git diff:${NC} nothing to commit"
     else
+      if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
+        git push --delete origin :$GITHUB_REF
+        git tag --delete :GITHUB_REF
+        git tag GITHUB_REF_NAME
+      fi
         echo -e "${OK}git status ($GITHUB_REF_NAME):${NC} \n`git status --short`"
         MESSAGE="docs: update Header/Footer - $GITHUB_EVENT_NAME, $GITHUB_WORKFLOW"
         echo -e "${OK}git commit ($GITHUB_REF_NAME):${NC} $MESSAGE"
@@ -93,7 +98,5 @@ git_push(){
       git push --delete origin :$GITHUB_REF
       git tag --delete $GITHUB_REF_NAME
       git tag GITHUB_REF_NAME
-      git push
-      
     fi
 }
