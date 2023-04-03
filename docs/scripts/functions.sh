@@ -74,8 +74,8 @@ git_push(){
     else
       if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
         git push --delete origin :$GITHUB_REF
-        git tag -d $GITHUB_REF_NAME 
-        #git tag $GITHUB_REF_NAME
+        #git tag -d $GITHUB_REF_NAME 
+        git tag $GITHUB_REF_NAME
       fi
         echo -e "${OK}git status ($GITHUB_REF_NAME):${NC} \n`git status --short`"
         MESSAGE="docs: update Header/Footer - $GITHUB_EVENT_NAME, $GITHUB_WORKFLOW"
