@@ -43,5 +43,6 @@ footer(){
 get_github_info
 header
 footer
+cat tmp.local
 cp tmp.local $FILE
 git_push
