@@ -10,7 +10,7 @@ header(){
     TMP="header.local"
     echo "<!-- OTC-HEADER-START -->" > $TMP
     echo "# $GITHUB_REPOSITORY" >> $TMP
-    echo "$STATUS, $DATE ($VERSION)" >> $TMP
+    echo "<p align="right">_$STATUS, $DATE ($VERSION)_</p>" >> $TMP
     echo "<details>" >> $TMP
     echo "<summary>Table of contents</summary>" >> $TMP
     echo >> $TMP
@@ -34,7 +34,7 @@ footer(){
     echo "<!-- BEGIN_TF_DOCS -->" >> $TMP
     echo "<!-- END_TF_DOCS -->" >> $TMP
     echo "---" >> $TMP
-    echo "<div class="pull-right">Updated: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID</div>" >> $TMP
+    echo "<p align="right">Updated: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID</p>" >> $TMP
     echo "<!-- OTC-FOOTER-END -->" >> $TMP
     sed -e '/'"$START"'/,/'"$END"'/!b' -e '/'"$END"'/!d;r '$TMP'' -e 'd' $FILE > tmp.local
     cp tmp.local $FILE
