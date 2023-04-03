@@ -2,7 +2,7 @@ name: OTC Test - Release
 on:
   push:
     branch:
-      - main
+      - 'main'
     tags:
       - '*.*.*'
 jobs:
