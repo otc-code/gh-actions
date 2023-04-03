@@ -69,7 +69,7 @@ git_push(){
         MESSAGE="docs: update Header/Footer - $GITHUB_EVENT_NAME, $GITHUB_WORKFLOW"
         echo -e "${OK}git commit ($GITHUB_REF_NAME):${NC} $MESSAGE"
         
-        git commit $FILE -m $MESSAGE
+        git commit $FILE -m "$MESSAGE"
         git push
         if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
             echo -e "  * ${INF}Push rejected${NC}: Local branch not up to date, will pull again !"
