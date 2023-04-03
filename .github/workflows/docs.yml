@@ -2,8 +2,6 @@ name: OTC Test - docs
 on:
   workflow_dispatch:
   pull_request:
-  release:
-    types: [published]
   push:
     branches:
       - '*'

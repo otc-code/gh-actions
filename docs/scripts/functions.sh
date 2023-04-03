@@ -32,16 +32,23 @@ function show_info(){
         echo -e "  * ${INF}PULL_REQUEST${NC}: Readme will not updated on PR!"
         exit 0
     fi
+    # if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
+    # echo -e "  * ${INF}RELEASE${NC}: Updates will happen on main branch!"
+    # git checkout main
+    # fi
 }
 
 get_github_info(){
     STATUS="draft"
-    VERSION="branch: $GITHUB_REF_NAME"
+    VERSION="$GITHUB_REF_NAME"
     DATE="` date +"%d.%m.%Y"`"
     if [[ "$GITHUB_REF_NAME" == "main" ]]; then
       STATUS="approved"
     fi
-}
+    if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
+      STATUS="released"
+    fi
+  }
 
 check_markers(){
     grep "$START" "$FILE" > /dev/null
@@ -65,12 +72,25 @@ git_push(){
     if [[ $? -eq 0 ]]; then
         echo -e "${OK}git diff:${NC} nothing to commit"
     else
+
         echo -e "${OK}git status ($GITHUB_REF_NAME):${NC} \n`git status --short`"
         MESSAGE="docs: update Header/Footer - $GITHUB_EVENT_NAME, $GITHUB_WORKFLOW"
         echo -e "${OK}git commit ($GITHUB_REF_NAME):${NC} $MESSAGE"
         
         git commit $FILE -m "$MESSAGE"
-        git push
+        # if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
+        #   echo -e "${OK}Release:${NC} moving Tag Version"
+        #   echo "-- delete local tag"
+        #   git tag -d "$GITHUB_REF_NAME"
+        #   git tag -l
+        #   echo "-- adding local tag"
+        #   git tag "$GITHUB_REF_NAME"
+        #   git tag -l
+        #   echo "--delete remote tag"
+        #   git push --delete origin "$GITHUB_REF_NAME"
+        # fi
+        
+        git push origin "$GITHUB_REF_NAME"
         if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
             echo -e "  * ${INF}Push rejected${NC}: Local branch not up to date, will pull again !"
             git pull
