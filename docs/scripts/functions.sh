@@ -32,6 +32,10 @@ function show_info(){
         echo -e "  * ${INF}PULL_REQUEST${NC}: Readme will not updated on PR!"
         exit 0
     fi
+    if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+      echo -e "  * ${INF}RELEASE${NC}: Updates will happen on main branch!"
+      git checkout main
+    fi
 }
 
 get_github_info(){
@@ -74,19 +78,7 @@ git_push(){
         echo -e "${OK}git commit ($GITHUB_REF_NAME):${NC} $MESSAGE"
         
         git commit $FILE -m "$MESSAGE"
-        # if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
-        #   echo -e "${OK}Release:${NC} moving Tag Version"
-        #   echo "-- delete local tag"
-        #   git tag -d "$GITHUB_REF_NAME"
-        #   git tag -l
-        #   echo "-- adding local tag"
-        #   git tag "$GITHUB_REF_NAME"
-        #   git tag -l
-        #   echo "--delete remote tag"
-        #   git push --delete origin "$GITHUB_REF_NAME"
-        # fi
-        
-        git push origin "$GITHUB_REF_NAME"
+        git push
         if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
             echo -e "  * ${INF}Push rejected${NC}: Local branch not up to date, will pull again !"
             git pull
