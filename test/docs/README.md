@@ -1,6 +1,6 @@
 <!-- OTC-HEADER-START -->
 # otc-code/gh-actions
-<p align=right>⚙ released, 05.04.2023 (1.0.12)</p>
+<p align=right>⚙ draft, 05.04.2023 (autorelease)</p>
 <details>
 <summary>Table of contents</summary>
 
@@ -31,5 +31,5 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 <!-- BEGIN_TF_DOCS -->
 <!-- END_TF_DOCS -->
 ---
-<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4618618854</p>
+<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4618765377</p>
 <!-- OTC-FOOTER-END -->
