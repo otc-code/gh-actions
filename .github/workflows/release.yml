@@ -3,6 +3,10 @@ on:
   push:
     tags:
       - '*.*.*'
+
+permissions:
+  contents: write
+
 jobs:
   test:
     name: OTC test - Release
