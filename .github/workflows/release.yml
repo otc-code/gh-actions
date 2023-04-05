@@ -3,8 +3,7 @@ on:
   push:
     branch:
       - 'main'
-    tags:
-      - '*.*.*'
+
 jobs:
   test:
     name: OTC test - Release
