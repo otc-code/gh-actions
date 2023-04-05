@@ -32,12 +32,12 @@ function show_info(){
         echo -e "  * ${INF}PULL_REQUEST${NC}: Readme will not updated on PR!"
         exit 0
     fi
-    if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
-      echo -e "  * ${INF}RELEASE${NC}: Updates will happen on main branch!"
-      git checkout main
-      git config pull.rebase true
-      git pull
-    fi
+    # if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+    #   echo -e "  * ${INF}RELEASE${NC}: Updates will happen on main branch!"
+    #   git checkout main
+    #   git config pull.rebase true
+    #   git pull
+    # fi
 }
 
 get_github_info(){
