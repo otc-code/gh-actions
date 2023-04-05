@@ -1,8 +1,6 @@
 <!-- OTC-HEADER-START -->
 # otc-code/gh-actions
-
-<p align=right>⚙ draft, 05.04.2023 (testworkflow)</p>
-
+<p align=right>⚙ released, 05.04.2023 (1.0.12)</p>
 <details>
 <summary>Table of contents</summary>
 
@@ -11,7 +9,6 @@
 - [Test 1](#test-1)
   * [Test 2](#test-2)
 - [Terraform](#terraform)
-- [](#)
 </details>
 <!-- OTC-HEADER-END -->
 
@@ -34,7 +31,5 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 <!-- BEGIN_TF_DOCS -->
 <!-- END_TF_DOCS -->
 ---
-
-<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4618589275</p>
-
+<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4618618854</p>
 <!-- OTC-FOOTER-END -->
