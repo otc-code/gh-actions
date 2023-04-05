@@ -13,3 +13,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: export
+      - name: Test - Docs
+        uses: ./docs/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/docs'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
