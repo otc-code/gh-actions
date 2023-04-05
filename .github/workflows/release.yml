@@ -16,7 +16,10 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: export
-      - uses: brpaz/action-semantic-release@v1
+      - name: Semantic Releaser
+        uses: jossef/action-semantic-releaser@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Test - Docs
       #   uses: ./docs/
