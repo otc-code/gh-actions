@@ -25,4 +25,3 @@ jobs:
         with:
           TF_DIR: '${{ github.workspace }}/test/docs'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
