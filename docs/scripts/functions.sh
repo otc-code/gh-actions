@@ -32,10 +32,6 @@ function show_info(){
         echo -e "  * ${INF}PULL_REQUEST${NC}: Readme will not updated on PR!"
         exit 0
     fi
-    # if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
-    # echo -e "  * ${INF}RELEASE${NC}: Updates will happen on main branch!"
-    # git checkout main
-    # fi
 }
 
 get_github_info(){
@@ -45,7 +41,7 @@ get_github_info(){
     if [[ "$GITHUB_REF_NAME" == "main" ]]; then
       STATUS="approved"
     fi
-    if [[ "$GITHUB_EVENT_NAME" == "release" ]]; then
+    if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
       STATUS="released"
     fi
   }
