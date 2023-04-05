@@ -25,9 +25,11 @@ jobs:
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v3
         with:
-            semantic_version: 16
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            branches: 'main'
+          semantic_version: 16  
+          branches: 'main'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
       # - name: "Determine tag"
