@@ -1,10 +1,8 @@
 <!-- OTC-HEADER-START -->
 # otc-code/gh-actions
-
 <p align=right>⚙ draft, 05.04.2023 (test)</p>
 <details>
 <summary>Table of contents</summary>
-
 
 
 - [Overview](#overview)
@@ -31,7 +29,5 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 <!-- BEGIN_TF_DOCS -->
 <!-- END_TF_DOCS -->
 ---
-
-<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4619297329</p>
-
+<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4619304600</p>
 <!-- OTC-FOOTER-END -->
