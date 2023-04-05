@@ -1,15 +1,14 @@
 <!-- OTC-HEADER-START -->
 # otc-code/gh-actions
-<p align=right>⚙ approved, 03.04.2023 (main)</p>
+<p align=right>⚙ released, 05.04.2023 (1.0.10)</p>
 <details>
 <summary>Table of contents</summary>
 
 
-- [otc-code/gh-actions](#otc-codegh-actions)
-  * [Overview](#overview)
-  * [Test 1](#test-1)
-    + [Test 2](#test-2)
-  * [Terraform](#terraform)
+- [Overview](#overview)
+- [Test 1](#test-1)
+  * [Test 2](#test-2)
+- [Terraform](#terraform)
 </details>
 <!-- OTC-HEADER-END -->
 
@@ -30,5 +29,5 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 <!-- BEGIN_TF_DOCS -->
 <!-- END_TF_DOCS -->
 ---
-<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4595623890</p>
+<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4618518501</p>
 <!-- OTC-FOOTER-END -->
