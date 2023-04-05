@@ -1,28 +1,29 @@
-# name: OTC Test - docs
-# on:
-#   workflow_dispatch:
-#   pull_request:
-#   push:
-#     branches:
-#       - '*'
-#     tags:
-#       - '*.*.*'
-# 
-# permissions:
-#   contents: write
-# 
-# jobs:
-#   test:
-#     name: OTC test - docs
-#     environment: dev
-#     runs-on: [Linux]
-#     steps:
-#       - uses: actions/checkout@v3
-#         with:
-#           token: ${{ secrets.GITHUB_TOKEN }}
-#       - run: export
-#       - name: Test - Docs
-#         uses: ./docs/
-#         with:
-#           TF_DIR: '${{ github.workspace }}/test/docs'
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+name: OTC Test - docs
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - '*'
+      - '!main'
+    tags:
+      - '*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    name: OTC test - docs
+    environment: dev
+    runs-on: [Linux]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: export
+      - name: Test - Docs
+        uses: ./docs/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/docs'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
