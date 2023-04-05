@@ -14,7 +14,7 @@ header(){
     echo "<details>" >> $TMP
     echo "<summary>Table of contents</summary>" >> $TMP
     echo >> $TMP
-    npx markdown-toc $FILE > toc.local
+    npx markdown-toc  --no-firsth1 $FILE > toc.local
     echo >> $TMP
     cat toc.local >> $TMP
     echo >> $TMP
