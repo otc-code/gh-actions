@@ -35,6 +35,7 @@ function show_info(){
     if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
       echo -e "  * ${INF}RELEASE${NC}: Updates will happen on main branch!"
       git checkout main
+      git config pull.rebase true
       git pull
     fi
 }
