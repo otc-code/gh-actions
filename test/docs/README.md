@@ -31,5 +31,5 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 <!-- BEGIN_TF_DOCS -->
 <!-- END_TF_DOCS -->
 ---
-<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4618852208</p>
+<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4618906596</p>
 <!-- OTC-FOOTER-END -->
