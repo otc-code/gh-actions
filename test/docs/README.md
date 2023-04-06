@@ -9,6 +9,12 @@
 - [Test 1](#test-1)
   * [Test 2](#test-2)
 - [Terraform](#terraform)
+- [Requirements](#requirements)
+- [Providers](#providers)
+- [Modules](#modules)
+- [Resources](#resources)
+- [Inputs](#inputs)
+- [Outputs](#outputs)
 </details>
 <!-- OTC-HEADER-END -->
 
@@ -28,7 +34,30 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 <!-- OTC-FOOTER-START -->
 ## Terraform
 <!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+No providers.
+
+## Modules
+
+No modules.
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
 <!-- END_TF_DOCS -->
 ---
-<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4625071853</p>
+<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4625154431</p>
 <!-- OTC-FOOTER-END -->
