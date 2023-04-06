@@ -30,7 +30,7 @@ footer(){
     check_markers
     TMP="footer.local"
     echo "<!-- OTC-FOOTER-START -->" >> $TMP
-    #echo "# Terraform Docs" >> $TMP
+    echo "# Terraform Docs" >> $TMP
     echo >> $TMP
     echo "<!-- BEGIN_TF_DOCS -->" >> $TMP
     echo "<!-- END_TF_DOCS -->" >> $TMP
