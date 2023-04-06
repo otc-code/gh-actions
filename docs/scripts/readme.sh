@@ -45,13 +45,14 @@ terraform_docs(){
   terraform-docs -c "$SCRIPT_DIRECTORY/terraform-docs.yml" $(dirname "${FILE}")
 }
 get_github_info
+echo "---ORG"
 cat $FILE
-echo "---"
+echo "---FOOT"
 footer
 cat $FILE
-echo "---"
+echo "---TF-DOCS"
 terraform_docs
-echo "---"
+echo "---HEAD"
 cat $FILE
 header
 git_push
