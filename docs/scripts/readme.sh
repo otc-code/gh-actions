@@ -41,7 +41,7 @@ footer(){
 }
 
 terraform_docs(){
-  terraform-docs $GITHUB_WORKSPACE -c "$SCRIPT_DIRECTORY/terraform-docs.yml"
+  terraform-docs -c "$SCRIPT_DIRECTORY/terraform-docs.yml" $(dirname "${FILE}")
 }
 get_github_info
 footer
