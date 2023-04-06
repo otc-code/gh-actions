@@ -9,7 +9,6 @@
 - [Test 1](#test-1)
   * [Test 2](#test-2)
 - [Terraform](#terraform)
-- [](#)
 </details>
 <!-- OTC-HEADER-END -->
 
@@ -30,6 +29,6 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 ## Terraform
 <!-- BEGIN_TF_DOCS -->
 <!-- END_TF_DOCS -->
-___
-<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4625065582</p>
+---
+<p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4625071853</p>
 <!-- OTC-FOOTER-END -->
