@@ -23,7 +23,7 @@ header(){
     echo "<!-- OTC-HEADER-END -->" >> $TMP
     sed -e '/'"$START"'/,/'"$END"'/!b' -e '/'"$END"'/!d;r '$TMP'' -e 'd' $FILE > tmp.local
     cp tmp.local $FILE
-  }
+}
 footer(){
     START="<!-- OTC-FOOTER-START -->"
     END="<!-- OTC-FOOTER-END -->"
@@ -34,7 +34,6 @@ footer(){
     echo >> $TMP
     echo "<!-- BEGIN_TF_DOCS -->" >> $TMP
     echo "<!-- END_TF_DOCS -->" >> $TMP
-    echo "---" >> $TMP
     echo "<p align="right">Updated: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID</p>" >> $TMP
     echo "<!-- OTC-FOOTER-END -->" >> $TMP
     sed -e '/'"$START"'/,/'"$END"'/!b' -e '/'"$END"'/!d;r '$TMP'' -e 'd' $FILE > tmp.local
@@ -42,17 +41,16 @@ footer(){
 }
 
 terraform_docs(){
-  terraform-docs -c "$SCRIPT_DIRECTORY/terraform-docs.yml" $(dirname "${FILE}")
+    myarray=(`find $(dirname "${FILE}") -maxdepth 1 -name "*.tf"`)
+    if [ ${#myarray[@]} -gt 0 ]; then
+        echo -e "${OK}Terraform Docs:${NC}Found *.tf files, running terraform-docs"
+        terraform-docs -c "$SCRIPT_DIRECTORY/terraform-docs.yml" $(dirname "${FILE}")
+    else
+      echo -e "${INF}Terraform Docs:${NC}No *.tf files, skipping terraform-docs"
+    fi
 }
 get_github_info
-echo "---ORG"
-cat $FILE
-echo "---FOOT"
 footer
-cat $FILE
-echo "---TF-DOCS"
 terraform_docs
-echo "---HEAD"
-cat $FILE
 header
 git_push

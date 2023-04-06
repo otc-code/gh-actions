@@ -36,7 +36,7 @@ function show_info(){
 
 get_github_info(){
     DATE="` date +"%d.%m.%Y"`"
-  }
+}
 
 check_markers(){
     grep "$START" "$FILE" > /dev/null
@@ -64,7 +64,7 @@ git_push(){
         echo -e "${OK}git status ($GITHUB_REF_NAME):${NC} \n`git status --short`"
         MESSAGE="docs: update Header/Footer - $GITHUB_EVENT_NAME, $GITHUB_WORKFLOW"
         echo -e "${OK}git commit ($GITHUB_REF_NAME):${NC} $MESSAGE"
-        
+
         git commit $FILE -m "$MESSAGE"
         git push
         if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
