@@ -19,8 +19,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: export
       - run: |
-          # git commit --allow-empty -m "fix: by push to main"
-          # git push origin main
+          git commit --allow-empty -m "fix: by push to main"
+          git push origin main
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v3
         with:
