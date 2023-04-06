@@ -126,7 +126,6 @@ function plan(){
 }
 
 function create_backend(){
-    cp "$SCRIPT_DIRECTORY/backend.tpl/conf.local.tpl" "$SCRIPT_DIRECTORY/backend.tpl/conf.tf"
     get_backend_provider
     configure_backend_provider
 
