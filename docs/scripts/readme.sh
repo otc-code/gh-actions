@@ -43,10 +43,10 @@ footer(){
 terraform_docs(){
     myarray=(`find $(dirname "${FILE}") -maxdepth 1 -name "*.tf"`)
     if [ ${#myarray[@]} -gt 0 ]; then
-        echo -e "${OK}Terraform Docs:${NC}Found *.tf files, running terraform-docs"
+        echo -e "${OK}Terraform Docs:${NC} Found *.tf files, running terraform-docs"
         terraform-docs -c "$SCRIPT_DIRECTORY/terraform-docs.yml" $(dirname "${FILE}")
     else
-      echo -e "${INF}Terraform Docs:${NC}No *.tf files, skipping terraform-docs"
+      echo -e "${INF}Terraform Docs:${NC} No *.tf files, skipping terraform-docs"
     fi
 }
 get_github_info
