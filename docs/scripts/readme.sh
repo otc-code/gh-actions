@@ -40,8 +40,11 @@ footer(){
     cp tmp.local $FILE
 }
 
-
+terraform_docs(){
+  terraform-docs $GITHUB_WORKSPACE -c "$SCRIPT_DIRECTORY/terraform-docs.yml"
+}
 get_github_info
-header
 footer
+terraform_docs
+header
 git_push
