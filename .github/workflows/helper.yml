@@ -28,7 +28,8 @@ jobs:
     environment: INT
     runs-on: [Linux]
     strategy:
-      files: ${{ needs.test.outputs.files }}
+      matrix:
+        files: ${{ needs.test.outputs.files }}
     needs: test
     steps:
       - name: Test
