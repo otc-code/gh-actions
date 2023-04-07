@@ -36,7 +36,7 @@ aws_config ()
             -backend-config="bucket=$bucket" \
             -backend-config="dynamodb_table=$dynamodb_table" \
             -backend-config="key=bootstrap.aws" \
-            -backend-config="encrypt=$encrypt" &> /dev/null
+            -backend-config="encrypt=$encrypt" #&> /dev/null
         echo -e "${OK}${NC} Refreshing backend state."
 
         echo yes|terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws -refresh-only \
@@ -63,7 +63,7 @@ aws_config_destroy (){
 
     cp $SCRIPT_DIRECTORY/backend.tpl/aws/conf.local.tpl $SCRIPT_DIRECTORY/backend.tpl/aws/conf.tf
     echo -e "${OK}${NC} Migrating state from remote to local"
-    terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws init -migrate-state -force-copy #&> /dev/null
+    terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws init -migrate-state -force-copy &> /dev/null
     echo -e "${OK}${NC} terraform destroy"
     terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws destroy --auto-approve \
         -var "cloud_region=$region" \
