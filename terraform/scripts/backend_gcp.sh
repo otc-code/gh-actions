@@ -14,6 +14,7 @@ gcp_config ()
         echo -e "${OK}${NC}Create Bootstrap Plan"
         terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/gcp plan -out=$PLAN_FILE \
             -var "cloud_region=$CLOUD_REGION" \
+            -var "gcp_project=$GCP_PROJECT_ID" \
             -var "bucket_name=$bucket" &> /dev/null
         if [ -f "$PLAN_FILE" ]; then
             echo -e "${OK}Bootstrap${NC}: Planfile $FILE exists."
@@ -32,6 +33,7 @@ gcp_config ()
 
         echo yes|terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/gcp -refresh-only \
                 -var "cloud_region=$CLOUD_REGION" \
+                -var "gcp_project=$GCP_PROJECT_ID" \
                 -var "bucket_name=$bucket" &> /dev/null
         rm $SCRIPT_DIRECTORY/backend.tpl/gcp/terraform.tfstate
     fi
@@ -54,5 +56,6 @@ gcp_config_destroy (){
     echo -e "${OK}${NC} terraform destroy"
     terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/gcp destroy --auto-approve \
     -var "cloud_region=$CLOUD_REGION" \
+    -var "gcp_project=$GCP_PROJECT_ID" \
     -var "bucket_name=$bucket" #&> /dev/null
 }

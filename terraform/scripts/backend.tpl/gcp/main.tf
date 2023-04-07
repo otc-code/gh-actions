@@ -1,6 +1,6 @@
 provider "google" {
   region  = var.cloud_region
-  project = "otc-plattform"
+  project = var.gcp_project
 }
 
 # Create a GCS Bucket

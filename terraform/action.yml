@@ -22,6 +22,10 @@ inputs:
     description: 'AWS Region, Azure location, GCP location for deployment'
     required: false
     default: 'default'
+  GCP_PROJECT_ID:
+    description: 'Google project_id'
+    required: false
+    default: 'otc-plattform'
   TF_PARTIAL_BACKEND_FILE:
     description: 'Partial backend file'
     required: false
@@ -47,6 +51,7 @@ runs:
         OTC_TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
         CLOUD_REGION: ${{ inputs.CLOUD_REGION }}
+        GCP_PROJECT_ID: ${{ inputs.CLOUD_REGION }}
 
 
 
