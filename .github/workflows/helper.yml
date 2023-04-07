@@ -33,5 +33,5 @@ jobs:
     steps:
       - name: Test
         env:
-         OUTPUT: ${{matrix.file}}
+         OUTPUT: ${{matrix.files}}
         run: echo $OUTPUT
