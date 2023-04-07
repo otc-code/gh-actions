@@ -16,9 +16,11 @@ outputs:
 runs:
   using: "composite"
   steps:
-  - name: Get files in 
+  - name: Get files 
     id: files
-    run: echo "files=$(ls ${{ inputs.path }}/*.${{ inputs.ext }} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+    run: |
+      echo "files=$(ls ${{ inputs.path }}/*.${{ inputs.ext }} | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+      echo $GITHUB_OUTPUT
     shell: bash
 
 
