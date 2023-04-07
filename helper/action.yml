@@ -20,11 +20,13 @@ runs:
     id: files
     run: |
       files=`ls ${{ inputs.path }}/*.${{ inputs.ext }}`
-      for eachfile in $files
-      do
-         echo $eachfile
-         echo "files=$eachfile" >> "$GITHUB_OUTPUT"
-      done
+      echo "Files: $files"
+      echo "files=$files >> "$GITHUB_OUTPUT"
+      # for eachfile in $files
+      # # do
+      # #    echo $eachfile
+      # #    echo "files=$eachfile" >> "$GITHUB_OUTPUT"
+      # # done
     shell: bash
 
 
