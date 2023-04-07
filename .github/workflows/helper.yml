@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   test:
-    name: OTC test - docs
+    name: OTC test - helper
     environment: INT
     runs-on: [Linux]
     steps:
@@ -25,3 +25,13 @@ jobs:
         with:
           path: '${{ github.workspace }}/test/terraform/tfvars'
           ext: 'tfvars'
+
+  outputs:
+    name: OTC test outputs - helper
+    environment: INT
+    runs-on: [Linux]
+    needs: test
+    steps:
+      - env:
+          OUTPUT: ${{needs.test.outputs.output1}}
+        run: echo "$OUTPUT"
