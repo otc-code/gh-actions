@@ -21,7 +21,7 @@ runs:
     run: |
       files=`ls ${{ inputs.path }}/*.${{ inputs.ext }}`
       echo "Files: $files"
-      echo "files=$files" >> "$GITHUB_OUTPUT"
+      # echo "files=$files" >> "$GITHUB_OUTPUT"
       # for eachfile in $files
       # # do
       # #    echo $eachfile
