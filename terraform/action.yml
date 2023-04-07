@@ -54,10 +54,10 @@ runs:
         GCP_PROJECT_ID: ${{ inputs.GCP_PROJECT_ID }}
 
     - name: upload tflint result
-      if: {{ inputs.TERRAFORM_ACTION == 'compliance' }} 
+      if: ${{ inputs.TERRAFORM_ACTION=='compliance' }} 
       uses: github/codeql-action/upload-sarif@v2
       with:
-        sarif_file: ${{ inputs.TF_DIR }}
+        sarif_file: '${{ inputs.TF_DIR }}/tflint.sarif.local'
         category: Terraform
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
