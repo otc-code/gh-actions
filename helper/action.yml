@@ -20,7 +20,7 @@ runs:
     id: files
     run: |
       files=`ls ${{ inputs.path }}/*.${{ inputs.ext }}`
-      echo "files=$files" >> $GITHUB_OUTPUT
+      echo "files=$files"
     shell: bash
 
 
