@@ -83,7 +83,7 @@ function compliance()
         echo -e "${INF}$TERRAFORM_ACTION-tflint${NC}: Using standard tflint.hcl !${NC}"
     fi
     cd $TF_DIR
-    tflint --force -c $TFLINT_CONFIG $TFVARS -f sarif > "$TF_DIR/tflint.sarif.local"
+    tflint --force -c $TFLINT_CONFIG $TFVARS -f junit > "$RESULTS_DIR/tflint.junit.xml.local"
     cd $SCRIPT_DIRECTORY
 }
 ########################################################################################################################
@@ -96,7 +96,7 @@ function security()
     fi
     tfvars
     cd $TF_DIR
-    LOG_LEVEL=error checkov -d . --download-external-modules false -o junitxml > "$RESULTS_DIR/checkov.junit.xml"
+    LOG_LEVEL=error checkov -d . --download-external-modules false -o junitxml > "$RESULTS_DIR/checkov.junit.xml.local"
     cd $SCRIPT_DIRECTORY
 }
 
