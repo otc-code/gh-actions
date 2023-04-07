@@ -19,7 +19,7 @@ runs:
   steps:
   - name: Get files 
     id: files
-    run: echo "files=$(ls ${{ inputs.path }}/*.${{ inputs.ext }}" >> $GITHUB_OUTPUT
+    run: echo "files=$(ls ${{ inputs.path }}/*.${{ inputs.ext }})" >> $GITHUB_OUTPUT
     shell: bash
 
 
