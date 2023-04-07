@@ -9,8 +9,8 @@ inputs:
     description: "File extension to match"
     required: false
 outputs:
-  paths:
-    value: ${{ steps.py.outputs.paths }}
+  files:
+    value: ${{ steps.files.outputs.files }}
     description: "List of all matching files"
 
 runs:
@@ -23,7 +23,7 @@ runs:
       for eachfile in $files
       do
          echo $eachfile
-         echo "paths=$eachfile" >> "$GITHUB_OUTPUT"
+         echo "files=$eachfile" >> "$GITHUB_OUTPUT"
       done
     shell: bash
 

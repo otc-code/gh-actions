@@ -33,5 +33,5 @@ jobs:
     needs: test
     steps:
       - env:
-          OUTPUT: ${{needs.test.outputs.paths}}
+          OUTPUT: ${{needs.test.outputs.files}}
         run: echo "$OUTPUT"
