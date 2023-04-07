@@ -8,16 +8,22 @@ inputs:
   ext:
     description: "File extension to match"
     required: false
+outputs:
+  paths:
+    value: ${{ steps.py.outputs.paths }}
+    description: "List of all matching files"
 
 runs:
   using: "composite"
   steps:
   - name: Get files in 
+  - id: files
     run: |
       files=`ls ${{ inputs.path }}/*.${{ inputs.ext }}`
       for eachfile in $files
       do
          echo $eachfile
+         echo "paths=$eachfile" >> "$GITHUB_OUTPUT"
       done
     shell: bash
 
