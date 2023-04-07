@@ -9,7 +9,7 @@ header(){
     check_markers
     TMP="header.local"
     echo "<!-- OTC-HEADER-START -->" > $TMP
-    echo "# $GITHUB_REPOSITORY" >> $TMP
+    echo "# $REPO_NAME" >> $TMP
     echo "<p align="right">⚙ $DATE</p>" >> $TMP
     echo "<details>" >> $TMP
     echo "<summary>Table of contents</summary>" >> $TMP
@@ -46,7 +46,7 @@ terraform_docs(){
         echo -e "${OK}Terraform Docs:${NC} Found *.tf files, running terraform-docs"
         terraform-docs -c "$SCRIPT_DIRECTORY/terraform-docs.yml" $(dirname "${FILE}")
     else
-      echo -e "${INF}Terraform Docs:${NC} No *.tf files, skipping terraform-docs"
+        echo -e "${INF}Terraform Docs:${NC} No *.tf files, skipping terraform-docs"
     fi
 }
 get_github_info

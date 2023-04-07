@@ -35,6 +35,7 @@ function show_info(){
 }
 
 get_github_info(){
+    REPO_NAME=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
     DATE="` date +"%d.%m.%Y"`"
 }
 
