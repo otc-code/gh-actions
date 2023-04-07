@@ -59,7 +59,6 @@ runs:
       with:
         sarif_file: '${{ inputs.TF_DIR }}/tflint.sarif.local'
         category: Terraform
-        token: ${{ inputs.GITHUB_TOKEN }}
 
 
 
