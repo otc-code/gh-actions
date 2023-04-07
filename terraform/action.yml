@@ -51,7 +51,7 @@ runs:
         OTC_TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
         CLOUD_REGION: ${{ inputs.CLOUD_REGION }}
-        GCP_PROJECT_ID: ${{ inputs.CLOUD_REGION }}
+        GCP_PROJECT_ID: ${{ inputs.GCP_PROJECT_ID }}
 
 
 
