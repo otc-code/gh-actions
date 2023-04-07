@@ -7,7 +7,7 @@ aws_config ()
         -backend-config="bucket=$bucket" \
         -backend-config="dynamodb_table=$dynamodb_table" \
         -backend-config="key=bootstrap.aws" \
-        -backend-config="encrypt=$encrypt" #&> /dev/null
+        -backend-config="encrypt=$encrypt" &> /dev/null
     status=$?
     if [ $status -ne 0 ]; then
         echo -e "${INF}* Backend${NC}: not configured or accessible, deploying AWS backend."
@@ -18,7 +18,7 @@ aws_config ()
         terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws plan -out=$PLAN_FILE \
             -var "cloud_region=$region" \
             -var "s3_bucket_name=$bucket" \
-            -var "dynamodb_table_name=$dynamodb_table" #&> /dev/null
+            -var "dynamodb_table_name=$dynamodb_table" &> /dev/null
 
         if [ -f "$PLAN_FILE" ]; then
             echo -e "${OK}Bootstrap${NC}: Planfile $FILE exists."
