@@ -1,71 +1,54 @@
 aws_config ()
 {
+    PLAN_FILE=$SCRIPT_DIRECTORY/backend.tpl/aws/bootstrap.local
     echo -e "${OK}AWS${NC} - Region: ${INF}$region${NC}, Bucket: ${INF}$bucket${NC}, DynamoDB: ${INF}$dynamodb_table${NC}"
-    terraform init -reconfigure \
+    terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws/aws init -reconfigure \
         -backend-config="region=$region" \
         -backend-config="bucket=$bucket" \
         -backend-config="dynamodb_table=$dynamodb_table" \
         -backend-config="key=bootstrap.aws" \
-        -backend-config="encrypt=$encrypt" &> /dev/null
+        -backend-config="encrypt=$encrypt" #&> /dev/null
     status=$?
     if [ $status -ne 0 ]; then
-        echo -e "  * ${INF}Backend${NC}: not configured or accessible, deploying AWS backend."
-        cp $SCRIPT_DIRECTORY/terraform/templates/conf.aws.tf.local $SCRIPT_DIRECTORY/terraform/aws/config.tf
-        echo "  * Terraform init -reconfigure"
-        terraform init -reconfigure &> /dev/null
-        echo "  * Create Bootstrap Plan"
-        terraform plan -out=bootstrap.plan \
+        echo -e "${INF}* Backend${NC}: not configured or accessible, deploying AWS backend."
+        cp $SCRIPT_DIRECTORY/backend.tpl/aws/conf.local.tpl $SCRIPT_DIRECTORY/backend.tpl/aws/conf.tf
+        echo -e "${OK}${NC}Terraform init -reconfigure"
+        terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws init -reconfigure &> /dev/null
+        echo -e "${OK}${NC}Create Bootstrap Plan"
+        terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws plan -out=$PLAN_FILE \
             -var "cloud_region=$region" \
             -var "s3_bucket_name=$bucket" \
-            -var "dynamodb_table_name=$dynamodb_table" &> /dev/null
-        FILE=bootstrap.plan
-        if [ -f "$FILE" ]; then
-            echo -e "  * ${OK}Bootstrap${NC}: Planfile $FILE exists."
+            -var "dynamodb_table_name=$dynamodb_table" #&> /dev/null
+
+        if [ -f "$PLAN_FILE" ]; then
+            echo -e "${OK}Bootstrap${NC}: Planfile $FILE exists."
         else
-            echo -e "  * ${ERR}Bootstrap{NC}: Planfile $FILE does NOT exists."
+            echo -e "${ERR}Bootstrap{NC}: Planfile $FILE does NOT exists."
             exit 1
         fi
-        echo "  * Apply Bootstrap Plan"
-        terraform apply bootstrap.plan
-        cp $SCRIPT_DIRECTORY/terraform/templates/conf.aws.tf $SCRIPT_DIRECTORY/terraform/$provider/config.tf
-        echo "  * Migrating state to backend."
+        echo -e "${OK}${NC} Apply Bootstrap Plan"
+        terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws apply $PLAN_FILE
+        rpl 'backend "local" {}' 'backend "s3" {}' $SCRIPT_DIRECTORY/backend.tpl/aws/conf.tf &> /dev/null
+        echo -e "${OK}${NC} Migrating state to backend."
 
-        terraform init -migrate-state -force-copy \
+        terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws init -migrate-state -force-copy \
             -backend-config="region=$region" \
             -backend-config="bucket=$bucket" \
             -backend-config="dynamodb_table=$dynamodb_table" \
             -backend-config="key=bootstrap.aws" \
             -backend-config="encrypt=$encrypt" &> /dev/null
-        echo "  * Refreshing backend state."
+        echo -e "${OK}${NC} Refreshing backend state."
 
-        echo yes|terraform apply -refresh-only \
+        echo yes|terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws -refresh-only \
             -var "cloud_region=$region" \
             -var "s3_bucket_name=$bucket" \
             -var "dynamodb_table_name=$dynamodb_table" &> /dev/null
-        rm $SCRIPT_DIRECTORY/terraform/$provider/terraform.tfstate
-    fi
-    echo -e "  * ${OK}Backend${NC}: Configured, add prequisites file to deployment"
-    if [ -z "$PRQ_FILE" ]; then echo "  * Skipping prequisites_file."
-    else
-        cp $PRQ_FILE $SCRIPT_DIRECTORY/terraform/$provider/prequisites.tf
-        terraform init -upgrade \
-            -backend-config="region=$region" \
-            -backend-config="bucket=$bucket" \
-            -backend-config="dynamodb_table=$dynamodb_table" \
-            -backend-config="key=bootstrap.aws" \
-            -backend-config="encrypt=$encrypt" &> /dev/null
-
-        terraform apply --auto-approve \
-            -var "cloud_region=$region" \
-            -var "s3_bucket_name=$bucket" \
-            -var "dynamodb_table_name=$dynamodb_table"
+        rm $SCRIPT_DIRECTORY/backend.tpl/aws/terraform.tfstate
     fi
 }
 
 aws_config_destroy (){
-    cd $SCRIPT_DIRECTORY/terraform/$provider
-    cp $SCRIPT_DIRECTORY/terraform/templates/conf.aws.tf $SCRIPT_DIRECTORY/terraform/aws/config.tf
-    terraform init -reconfigure \
+    terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws init -reconfigure \
         -backend-config="region=$region" \
         -backend-config="bucket=$bucket" \
         -backend-config="dynamodb_table=$dynamodb_table" \
@@ -74,15 +57,15 @@ aws_config_destroy (){
     status=$?
 
     if [ $status -ne 0 ]; then
-        echo "  * Backend not configured!"
+        echo -e "${ERR}Backend destroy${NC}: Backend not configured!"
         exit 1
     fi
 
-    cp $SCRIPT_DIRECTORY/terraform/templates/conf.aws.tf.local config.tf
-    echo "  * Migrating state from remote to local"
-    terraform init -migrate-state -force-copy &> /dev/null
-    echo "  * terraform destroy"
-    terraform destroy --auto-approve \
+    cp $SCRIPT_DIRECTORY/backend.tpl/aws/conf.local.tpl $SCRIPT_DIRECTORY/backend.tpl/aws/conf.tf
+    echo -e "${OK}${NC} Migrating state from remote to local"
+    terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws init -migrate-state -force-copy &> /dev/null
+    echo -e "${OK}${NC} terraform destroy"
+    terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws destroy --auto-approve \
         -var "cloud_region=$region" \
         -var "s3_bucket_name=$bucket" \
         -var "dynamodb_table_name=$dynamodb_table"

@@ -19,7 +19,7 @@ concurrency:
 jobs:
   test:
     name: OTC Actions Automatic Tests
-    environment: dev
+    environment: INT
     runs-on: [otc-ubuntu-latest]
     steps:
       - uses: actions/checkout@v3

@@ -18,6 +18,19 @@ inputs:
   OTC_TF_VARS_FILE:
     description: 'tfvars file'
     required: false
+  CLOUD_REGION:
+    description: 'AWS Region, Azure location, GCP location for deployment'
+    required: false
+    default: 'default'
+  TF_PARTIAL_BACKEND_FILE:
+    description: 'Partial backend file'
+    required: false
+    default: ''
+  BACKEND_DESTROY:
+    description: 'Destroy Backend'
+    required: false
+    default: 'false'
+    
 runs:
   using: "composite"
   steps:
@@ -28,9 +41,12 @@ runs:
       env:
         TF_DIR: ${{ inputs.TF_DIR}}
         TERRAFORM_ACTION: ${{ inputs.TERRAFORM_ACTION }}
-        TF_BACKEND_FILE: ${{ inputs.TF_BACKEND_FILE }}
+        TF_PARTIAL_BACKEND_FILE: ${{ inputs.TF_BACKEND_FILE }}
+        BACKEND_DESTROY: ${{ inputs.BACKEND_DESTROY }}
         TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
         OTC_TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        CLOUD_REGION: ${{ inputs.CLOUD_REGION }}
+
 
 

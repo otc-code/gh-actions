@@ -116,19 +116,37 @@ function get_backend_provider(){
 configure_backend_provider(){
     case $backend in
         aws)
-            rpl 'backend "local" {}' 'backend "s3" {}' $SCRIPT_DIRECTORY/backend.tpl/conf.tf &> /dev/null
+            rpl 'backend "local" {}' 'backend "s3" {}' $SCRIPT_DIRECTORY/backend.tpl/aws/conf.tf &> /dev/null
             source "$SCRIPT_DIRECTORY/backend_aws.sh"
+            aws_config
             echo -e "${OK}$TERRAFORM_ACTION${NC}: AWS Backend configured."
+            if [[ "$BACKEND_DESTROY" == "true" ]]; then
+                echo -e "${ERR}AWS Destroy${NC}: Destroy the backend!"
+                aws_config_destroy
+            fi
             ;;
         azr)
-            rpl 'backend "local" {}' 'backend "azurerm" {}' $SCRIPT_DIRECTORY/backend.tpl/conf.tf &> /dev/null
+            rpl 'backend "local" {}' 'backend "azurerm" {}' $SCRIPT_DIRECTORY/backend.tpl/azr/conf.tf &> /dev/null
             echo -e "${OK}$TERRAFORM_ACTION${NC}: AzureRM Backend configured."
-            source "$SCRIPT_DIRECTORY/backend_azr.sh"
+            source "$SCRIPT_DIRECTORY/backend_azure.sh"
+            azure_config
+            echo -e "${OK}$TERRAFORM_ACTION${NC}: Azure Backend configured."
+            if [[ "$BACKEND_DESTROY" == "true" ]]; then
+                echo -e "${ERR}Azure Destroy${NC}: Destroy the backend!"
+                azure_config_destroy
+            fi
             ;;
         gcp)
-            rpl 'backend "local" {}' 'backend "gcs" {}' $SCRIPT_DIRECTORY/backend.tpl/conf.tf &> /dev/null
+            rpl 'backend "local" {}' 'backend "gcs" {}' $SCRIPT_DIRECTORY/backend.tpl/gcp/conf.tf &> /dev/null
             source "$SCRIPT_DIRECTORY/backend_gcp.sh"
             echo -e "${OK}$TERRAFORM_ACTION${NC}:${NC} gcs Backend configured."
+            source "$SCRIPT_DIRECTORY/backend_gcp.sh"
+            gcp_config
+            echo -e "${OK}$TERRAFORM_ACTION${NC}: GCP Backend configured."
+            if [[ "$BACKEND_DESTROY" == "true" ]]; then
+                echo -e "${ERR}GCP Destroy${NC}: Destroy the backend!"
+                gcp_config_destroy
+            fi
             ;;
         *)
             echo -e "${ERR}TERRAFORM_ACTION${NC}: Could not configure Backend."
@@ -162,7 +180,7 @@ get_providers(){
         echo -e "${INF}${TERRAFORM_ACTION}${NC}: Google provider not found."
         GCP="true"
     fi
-# echo "AWS=$AWS" >> "$GITHUB_OUTPUT"
-# echo "AZR=$AZR" >> "$GITHUB_OUTPUT"
-# echo "GCP=$AWS" >> "$GITHUB_OUTPUT"
+    # echo "AWS=$AWS" >> "$GITHUB_OUTPUT"
+    # echo "AZR=$AZR" >> "$GITHUB_OUTPUT"
+    # echo "GCP=$AWS" >> "$GITHUB_OUTPUT"
 }

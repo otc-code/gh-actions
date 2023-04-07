@@ -13,7 +13,7 @@ permissions:
 jobs:
   test:
     name: OTC test - docs
-    environment: dev
+    environment: INT
     runs-on: [Linux]
     steps:
       - uses: actions/checkout@v3
@@ -24,4 +24,9 @@ jobs:
         uses: ./docs/
         with:
           TF_DIR: '${{ github.workspace }}/test/docs'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test - Docs
+        uses: ./docs/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/terraform'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
