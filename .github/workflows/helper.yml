@@ -23,15 +23,15 @@ jobs:
           path: '${{ github.workspace }}/test/terraform/tfvars'
           ext: 'tfvars'
 
-  outputs:
-    name: OTC test outputs - helper
-    environment: INT
-    runs-on: [Linux]
-    strategy:
-      file: ${{ needs.test.outputs.files }}
-    needs: test
-    steps:
-      - name: Test
-        env:
-         OUTPUT: ${{matrix.files}}
-        run: echo $OUTPUT
+  # outputs:
+  #   name: OTC test outputs - helper
+  #   environment: INT
+  #   runs-on: [Linux]
+  #   strategy:
+  #     file: ${{ needs.test.outputs.files }}
+  #   needs: test
+  #   steps:
+  #     - name: Test
+  #       env:
+  #        OUTPUT: ${{matrix.files}}
+  #       run: echo $OUTPUT
