@@ -53,6 +53,12 @@ runs:
         CLOUD_REGION: ${{ inputs.CLOUD_REGION }}
         GCP_PROJECT_ID: ${{ inputs.GCP_PROJECT_ID }}
 
+    - name: tflint result
+      uses: github/codeql-action/upload-sarif@v2
+        with:
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: tflint.sarif.local
+          category: Terraform
 
 
 

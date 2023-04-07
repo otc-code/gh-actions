@@ -83,7 +83,7 @@ function compliance()
         echo -e "${INF}$TERRAFORM_ACTION-tflint${NC}: Using standard tflint.hcl !${NC}"
     fi
     cd $TF_DIR
-    tflint --force -c $TFLINT_CONFIG $TFVARS -f junit > "$RESULTS_DIR/tflint.junit.xml"
+    tflint --force -c $TFLINT_CONFIG $TFVARS -f sarif > "$TF_DIR/tflint.sarif.local"
     cd $SCRIPT_DIRECTORY
 }
 ########################################################################################################################
