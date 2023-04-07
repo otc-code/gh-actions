@@ -41,7 +41,7 @@ runs:
       env:
         TF_DIR: ${{ inputs.TF_DIR}}
         TERRAFORM_ACTION: ${{ inputs.TERRAFORM_ACTION }}
-        TF_PARTIAL_BACKEND_FILE: ${{ inputs.TF_BACKEND_FILE }}
+        TF_PARTIAL_BACKEND_FILE: ${{ inputs.TF_PARTIAL_BACKEND_FILE }}
         BACKEND_DESTROY: ${{ inputs.BACKEND_DESTROY }}
         TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
         OTC_TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
