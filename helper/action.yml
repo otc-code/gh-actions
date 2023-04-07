@@ -8,6 +8,7 @@ inputs:
   ext:
     description: "File extension to match"
     required: false
+
 outputs:
   files:
     value: ${{ steps.files.outputs.files }}
