@@ -1,0 +1,26 @@
+name: 'Update Documentation'
+description: 'Action for automatic documentation updates'
+
+inputs:
+  path:
+    description: "Path where searching files"
+    required: false
+  ext:
+    description: "File extension to match"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+  - name: Get files in 
+    run: |
+      files=`ls ${{ inputs.path }}/*.${{ inputs.ext }}`
+      for eachfile in $files
+      do
+         echo $eachfile
+      done
+    shell: bash
+
+
+
+
