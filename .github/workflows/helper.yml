@@ -31,4 +31,4 @@ jobs:
     steps:
       - env:
           OUTPUT: ${{needs.test.outputs.files}}
-        run: echo "$OUTPUT"
+        run: echo $OUTPUT
