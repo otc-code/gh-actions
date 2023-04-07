@@ -12,13 +12,13 @@ azure_config ()
         echo -e "${INF}* Backend${NC}: not configured or accessible, deploying Azure backend."
         cp $SCRIPT_DIRECTORY/backend.tpl/azr/conf.local.tpl $SCRIPT_DIRECTORY/backend.tpl/azr/conf.tf
         echo -e "${OK}${NC}Terraform init -reconfigure"
-        terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/azr init -reconfigure #&> /dev/null
+        terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/azr init -reconfigure &> /dev/null
         echo -e "${OK}${NC}Create Bootstrap Plan"
         terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/azr plan -out=$PLAN_FILE \
             -var "cloud_region=$CLOUD_REGION" \
             -var "resource_group_name=$resource_group_name" \
             -var "storage_account_name=$storage_account_name" \
-            -var "container_name=$container_name"  #&> /dev/null
+            -var "container_name=$container_name"  &> /dev/null
 
         if [ -f "$PLAN_FILE" ]; then
             echo -e "${OK}Bootstrap${NC}: Planfile $FILE exists."
