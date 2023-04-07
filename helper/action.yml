@@ -23,7 +23,7 @@ runs:
       for eachfile in $files
        do
         echo "Files: $eachfile"
-        echo "files=$eachfile" >> "$GITHUB_OUTPUT"
+        echo "::set-output name=files::$eachfile"
        done
     shell: bash
 
