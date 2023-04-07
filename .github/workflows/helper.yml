@@ -31,6 +31,7 @@ jobs:
       file: ${{ needs.test.outputs.files }}
     needs: test
     steps:
-      - env:
-          OUTPUT: ${{matrix.file}}
-      run: echo $OUTPUT
+      - name: Test
+        env:
+         OUTPUT: ${{matrix.file}}
+        run: echo $OUTPUT
