@@ -17,7 +17,7 @@ runs:
   using: "composite"
   steps:
   - name: Get files in 
-  - id: files
+    id: files
     run: |
       files=`ls ${{ inputs.path }}/*.${{ inputs.ext }}`
       for eachfile in $files
