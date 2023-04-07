@@ -20,7 +20,7 @@ runs:
     id: files
     run: |
       files=`ls ${{ inputs.path }}/*.${{ inputs.ext }}`
-      echo "::set-output name=files::$files"
+       echo "files=$files" >> $GITHUB_OUTPUT
     shell: bash
 
 
