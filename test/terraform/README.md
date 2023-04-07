@@ -1,7 +1,8 @@
 <!-- OTC-HEADER-START -->
 # otc-code/gh-actions
+
 <p align=right>⚙ 07.04.2023</p>
-<details>
+
 <summary>Table of contents</summary>
 
 
@@ -68,5 +69,7 @@ Loreme ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
 | <a name="output_custom_name"></a> [custom\_name](#output\_custom\_name) | Outputs the custom name |
 | <a name="output_pet"></a> [pet](#output\_pet) | Outputs the custom name |
 <!-- END_TF_DOCS -->
+
 <p align=right>Updated: https://github.com/otc-code/gh-actions/actions/runs/4637005925</p>
+
 <!-- OTC-FOOTER-END -->
