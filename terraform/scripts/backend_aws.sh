@@ -2,7 +2,7 @@ aws_config ()
 {
     PLAN_FILE=$SCRIPT_DIRECTORY/backend.tpl/aws/bootstrap.local
     echo -e "${OK}AWS${NC} - Region: ${INF}$region${NC}, Bucket: ${INF}$bucket${NC}, DynamoDB: ${INF}$dynamodb_table${NC}"
-    terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws/aws init -reconfigure \
+    terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/aws init -reconfigure \
         -backend-config="region=$region" \
         -backend-config="bucket=$bucket" \
         -backend-config="dynamodb_table=$dynamodb_table" \
