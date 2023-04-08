@@ -11,7 +11,7 @@ inputs:
 
 outputs:
   files:
-    value: ${{ tojson(steps.files.outputs.files) }}
+    value: ${{ steps.files.outputs.files }}
     description: "List of all matching files"
 
 runs:
