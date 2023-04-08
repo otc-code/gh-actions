@@ -31,12 +31,14 @@ jobs:
     name: OTC test outputs - helper
     environment: INT
     runs-on: [Linux]
-    strategy:
-      matrix:
-        file: ${{ fromjson(needs.test.outputs.files) }}
+    # strategy:
+    #   matrix:
+    #     file: ${{ fromjson(needs.test.outputs.files) }}
     needs: test
     steps:
       - name: Test
         env:
          OUTPUT: ${{matrix.file}}
-        run: echo $OUTPUT
+        run: |
+          echo ${{ fromjson(needs.test.outputs.files) }}
+          echo ${{ fromjson(needs.test.outputs.dirs) }}
