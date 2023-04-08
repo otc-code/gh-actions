@@ -13,6 +13,9 @@ outputs:
   files:
     value: ${{ steps.files.outputs.files }}
     description: "List of all matching files"
+  dirs:
+    value: ${{ steps.dirs.outputs.dirs }}
+    description: "List of all matching files"
 
 runs:
   using: "composite"
@@ -22,6 +25,8 @@ runs:
     run: echo "files=$(ls ${{ inputs.path }}/*.${{ inputs.ext }}| jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
     shell: bash
 
-
-
+  - name: Get dirs
+    id: dirs
+    run: echo "dirs=$(ls -d ${{ inputs.path }}/*| jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+    shell: bash
 

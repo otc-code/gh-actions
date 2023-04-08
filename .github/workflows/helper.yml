@@ -17,6 +17,7 @@ jobs:
     runs-on: [Linux]
     outputs:
       files: ${{ steps.files.outputs.files }}
+      dirs: ${{ steps.files.outputs.dirs }}
     steps:
       - uses: actions/checkout@v3
       - name: Test - Helper
