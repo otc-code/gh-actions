@@ -29,7 +29,7 @@ jobs:
     runs-on: [Linux]
     strategy:
       matrix:
-        files: ${{ needs.test.outputs.files }}
+        files: ${{ fromJson(needs.test.outputs.files) }}
     needs: test
     steps:
       - name: Test
