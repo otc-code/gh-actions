@@ -22,7 +22,6 @@ runs:
     run: echo "files=$(ls ${{ inputs.path }}/*.${{ inputs.ext }}| jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
     shell: bash
   - name: Show files 
-    id: files
     run: echo "${{ steps.files.outputs.files }}"
     shell: bash
 
