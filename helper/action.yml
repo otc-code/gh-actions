@@ -11,19 +11,17 @@ inputs:
 
 outputs:
   files:
-    value: ${{ steps.files.outputs.files }}
+    value: ${{ tojson(steps.files.outputs.files) }}
     description: "List of all matching files"
 
 runs:
   using: "composite"
   steps:
-  - name: Get files 
+  - name: Get files
     id: files
     run: echo "files=$(ls ${{ inputs.path }}/*.${{ inputs.ext }}| jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
     shell: bash
-  - name: Show files 
-    run: echo "${{ steps.files.outputs.files }}"
-    shell: bash
+
 
 
 
