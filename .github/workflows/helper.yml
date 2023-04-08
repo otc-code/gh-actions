@@ -13,12 +13,14 @@ permissions:
 jobs:
   test:
     name: OTC test - helper
-    id: test
     environment: INT
     runs-on: [Linux]
+    outputs:
+      files: ${{ steps.files.outputs.files }}
     steps:
       - uses: actions/checkout@v3
       - name: Test - Helper
+        id: files
         uses: ./helper/
         with:
           path: '${{ github.workspace }}/test/terraform/tfvars'
