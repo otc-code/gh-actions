@@ -40,5 +40,5 @@ jobs:
         env:
          OUTPUT: ${{matrix.file}}
         run: |
-          echo ${{ fromjson(needs.test.outputs.files) }}
-          echo ${{ fromjson(needs.test.outputs.dirs) }}
+          echo ${{ needs.test.outputs.files }}
+          echo ${{ needs.test.outputs.dirs }}
