@@ -27,12 +27,12 @@ jobs:
     name: OTC test outputs - helper
     environment: INT
     runs-on: [Linux]
-    strategy:
-      matrix:
-        file: ${{ needs.test.outputs.files }}
+    # strategy:
+    #   matrix:
+    #     file: ${{ needs.test.outputs.files }}
     needs: test
     steps:
       - name: Test
         env:
          OUTPUT: ${{matrix.file}}
-        run: echo $OUTPUT
+        run: echo ${{ needs.test.outputs.files }}
