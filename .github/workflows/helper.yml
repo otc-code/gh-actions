@@ -29,10 +29,10 @@ jobs:
     runs-on: [Linux]
     strategy:
       matrix:
-        files: ${{ fromJson(needs.test.outputs.files) }}
+        file: ${{ needs.test.outputs.files }}
     needs: test
     steps:
       - name: Test
         env:
-         OUTPUT: ${{matrix.files}}
+         OUTPUT: ${{matrix.file}}
         run: echo $OUTPUT
