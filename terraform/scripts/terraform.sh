@@ -105,7 +105,6 @@ function plan(){
     echo -e "${OK}$TERRAFORM_ACTION${NC}: running terraform plan $TFVARS${NC}"
     terraform -chdir=$TF_DIR plan $TFVARS -input=false -out $TF_DIR/tf.plan
     terraform -chdir=$TF_DIR show -json $TF_DIR/tf.plan > $TF_DIR/tf.plan.json.local
-    terraform show -no-color plan.local > $TF_DIR/plan.out.local
     STDOUT=$(cat $TF_DIR/plan.out.local)
     # We need to strip the single quotes that are wrapping it so we can parse it with JQ
     plan=$(cat $TF_DIR/tf.plan.json.local | sed "s/^'//g" | sed "s/'$//g")
