@@ -122,6 +122,10 @@ function plan(){
 
     gha_notice "Terraform plan" "Terraform plan: $create to add, $update to change, $delete to destroy."
 }
+function apply(){
+    echo -e "${OK}$TERRAFORM_ACTION${NC}: running terraform apply with  $TF_DIR/tf.plan"
+    terraform -chdir=$TF_DIR apply $TF_DIR/tf.plan
+}
 
 function create_backend(){
     get_backend_provider
