@@ -125,6 +125,12 @@ function plan(){
 function apply(){
     echo -e "${OK}$TERRAFORM_ACTION${NC}: running terraform apply with  $TF_DIR/tf.plan"
     terraform -chdir=$TF_DIR apply $TF_DIR/tf.plan
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        echo -e "${ERR}Error: terraform apply failed!${NC}"
+        exit 1
+    else
+        echo -e "${OK}Terraform apply:${NC} successful!"
+    fi
     gha_notice "terraform output `basename $TF_DIR`" "`terraform -chdir=$TF_DIR output -no-color`"
 }
 
