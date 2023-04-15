@@ -125,7 +125,7 @@ function plan(){
 function apply(){
     echo -e "${OK}$TERRAFORM_ACTION${NC}: running terraform apply with  $TF_DIR/tf.plan"
     terraform -chdir=$TF_DIR apply $TF_DIR/tf.plan
-    gha_notice "terraform output `basename $ROOT_DIR` - $CLOUD_REGION" "`terraform -chdir=$ROOT_DIR output -no-color`"
+    gha_notice "terraform output `basename $TF_DIR`" "`terraform -chdir=$TF_DIR output -no-color`"
 }
 
 function create_backend(){
