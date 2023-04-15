@@ -32,9 +32,9 @@ function init(){
     git config --global --add url."https://$GITHUB_TOKEN:x-oauth-basic@github".insteadOf https://github
     git config --global --add url."https://$GITHUB_TOKEN:x-oauth-basic@github".insteadOf git@github
     if [[ ! -f "$TF_PARTIAL_BACKEND_FILE" ]]; then
-        terraform -chdir=$TF_DIR init -reconfigure
+        terraform -chdir=$TF_DIR init -reconfigure -upgrade
     else
-        terraform -chdir=$TF_DIR init -reconfigure -backend-config=$TF_PARTIAL_BACKEND_FILE
+        terraform -chdir=$TF_DIR init -reconfigure -backend-config=$TF_PARTIAL_BACKEND_FILE -upgrade
     fi
     if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
         git config --global --unset-all url."https://$GITHUB_TOKEN:x-oauth-basic@github".insteadOf
