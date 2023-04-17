@@ -56,7 +56,7 @@ check_markers(){
 git_push(){
     git config --global user.name github-actions
     git config --global user.email github-actions@github.com
-    git config pull.rebase false 
+    git config pull.ff only 
     git diff --exit-code &> OUT.local &> /dev/null
     if [[ $? -eq 0 ]]; then
         echo -e "${OK}git diff:${NC} nothing to commit"
