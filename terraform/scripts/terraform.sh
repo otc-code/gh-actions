@@ -122,6 +122,29 @@ function plan(){
 
     gha_notice "Terraform plan" "Terraform plan: $create to add, $update to change, $delete to destroy."
 }
+function plan_no_refresh(){
+    tfvars
+    echo -e "${OK}$TERRAFORM_ACTION${NC}: running terraform plan $TFVARS${NC}"
+    terraform -chdir=$TF_DIR plan $TFVARS -input=false -refresh=false -out $TF_DIR/tf.plan
+    terraform -chdir=$TF_DIR show -json $TF_DIR/tf.plan > $TF_DIR/tf.plan.json.local
+    # We need to strip the single quotes that are wrapping it so we can parse it with JQ
+    plan=$(cat $TF_DIR/tf.plan.json.local | sed "s/^'//g" | sed "s/'$//g")
+    # Get the count of the number of resources being created
+    create=$(echo "$plan" | jq -r ".resource_changes[].change.actions[]" | grep "create" | wc -l | sed 's/^[[:space:]]*//g')
+    # Get the count of the number of resources being updated
+    update=$(echo "$plan" | jq -r ".resource_changes[].change.actions[]" | grep "update" | wc -l | sed 's/^[[:space:]]*//g')
+    # Get the count of the number of resources being deleted
+    delete=$(echo "$plan" | jq -r ".resource_changes[].change.actions[]" | grep "delete" | wc -l | sed 's/^[[:space:]]*//g')
+    echo -e "  * ${OK}Terraform plan:${NC} ${OK}$create to add${NC}, ${INF}$update to change${NC} and ${ERR}$delete to delete${NC}!"
+
+    if [ $delete -ne 0 ];  then
+        gha_warn "Deleted resources" "This plan will delete resources!"
+    fi
+
+
+    gha_notice "Terraform plan" "Terraform plan: $create to add, $update to change, $delete to destroy."
+}
+
 function apply(){
     echo -e "${OK}$TERRAFORM_ACTION${NC}: running terraform apply with  $TF_DIR/tf.plan"
     terraform -chdir=$TF_DIR apply $TF_DIR/tf.plan
