@@ -48,7 +48,7 @@ runs:
         TF_PARTIAL_BACKEND_FILE: ${{ inputs.TF_PARTIAL_BACKEND_FILE }}
         BACKEND_DESTROY: ${{ inputs.BACKEND_DESTROY }}
         TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
-        OTC_TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
+        OTC_TF_VARS_FILE: ${{ inputs.OTC_TF_VARS_FILE }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
         CLOUD_REGION: ${{ inputs.CLOUD_REGION }}
         GCP_PROJECT_ID: ${{ inputs.GCP_PROJECT_ID }}

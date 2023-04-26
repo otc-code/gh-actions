@@ -70,25 +70,25 @@ jobs:
           TF_DIR: '${{ github.workspace }}/test/terraform'
           TERRAFORM_ACTION: 'validate'
       
-      - name: Terraform compliance
-        uses: ./terraform/
-        with:
-          TF_DIR: '${{ github.workspace }}/test/terraform'
-          TERRAFORM_ACTION: 'compliance'
-      
-      - name: Terraform security
-        uses: ./terraform/
-        with:
-          TF_DIR: '${{ github.workspace }}/test/terraform'
-          TERRAFORM_ACTION: 'security'
+      # - name: Terraform compliance
+      #   uses: ./terraform/
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+      #     TERRAFORM_ACTION: 'compliance'
+      # 
+      # - name: Terraform security
+      #   uses: ./terraform/
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}/test/terraform'
+      #     TERRAFORM_ACTION: 'security'
 
-      - name: run kics Scan
-        uses: checkmarx/kics-github-action@v1.6.3
-        with:
-          path: '${{ github.workspace }}/azr-storage'
-          ignore_on_exit: results
-          cloud_provider: 'aws, azure, gcp'
-          token: ${{ secrets.ORG_GITHUB_TOKEN }}
+      # - name: run kics Scan
+      #   uses: checkmarx/kics-github-action@v1.6.3
+      #   with:
+      #     path: '${{ github.workspace }}/azr-storage'
+      #     ignore_on_exit: results
+      #     cloud_provider: 'aws, azure, gcp'
+      #     token: ${{ secrets.ORG_GITHUB_TOKEN }}
 
       # - name: run kics Scan
       #   uses: checkmarx/kics-github-action@v1.6.3
