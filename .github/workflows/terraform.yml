@@ -60,7 +60,7 @@ jobs:
         with:
           TF_DIR: '${{ github.workspace }}/test/terraform'
           TERRAFORM_ACTION: 'init'
-          GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ORG_ADMIN_TOKEN }}
       
       
       
