@@ -20,7 +20,7 @@ jobs:
   test:
     name: OTC Actions Automatic Tests
     environment: INT
-    runs-on: [otc-ubuntu-latest]
+    runs-on: [Linux]
     steps:
       - uses: actions/checkout@v3
         with:
