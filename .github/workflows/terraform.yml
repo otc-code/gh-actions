@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.ORG_GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: AWS login
         uses: aws-actions/configure-aws-credentials@v2
         with:
