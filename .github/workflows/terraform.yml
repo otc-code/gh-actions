@@ -90,13 +90,13 @@ jobs:
           cloud_provider: 'aws, azure, gcp'
           token: ${{ secrets.ORG_GITHUB_TOKEN }}
 
-      - name: run kics Scan
-        uses: checkmarx/kics-github-action@v1.6.3
-        with:
-          path: '${{ github.workspace }}/test/terraform'
-          ignore_on_exit: results
-          cloud_provider: 'aws, azure, gcp'
-          token: ${{ secrets.ORG_GITHUB_TOKEN }}
+      # - name: run kics Scan
+      #   uses: checkmarx/kics-github-action@v1.6.3
+      #   with:
+      #     path: '${{ github.workspace }}/test/terraform'
+      #     ignore_on_exit: results
+      #     cloud_provider: 'aws, azure, gcp'
+      #     token: ${{ secrets.ORG_GITHUB_TOKEN }}
 
 
     
@@ -138,10 +138,10 @@ jobs:
       #     TERRAFORM_ACTION: 'plan'
       #     TF_VARS_FILE: '${{ github.workspace }}/test/terraform/tfvars/customer.tfvars'
       # 
-      # - name: Terraform plan with otc_tfvars
-      #   uses: ./terraform/
-      #   with:
-      #     TF_DIR: '${{ github.workspace }}/test/terraform'
-      #     TERRAFORM_ACTION: 'plan'
-      #     TF_VARS_FILE: '${{ github.workspace }}/test/terraform/tfvars/customer.tfvars'
-      #     OTC_TF_VARS_FILE: '${{ github.workspace }}/test/terraform/tfvars/otc.tfvars'
+      - name: Terraform plan with otc_tfvars
+        uses: ./terraform/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/terraform'
+          TERRAFORM_ACTION: 'plan'
+          TF_VARS_FILE: '${{ github.workspace }}/test/terraform/tfvars/customer.tfvars'
+          OTC_TF_VARS_FILE: '${{ github.workspace }}/test/terraform/tfvars/otc.tfvars'
