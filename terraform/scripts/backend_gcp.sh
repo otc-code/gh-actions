@@ -1,7 +1,7 @@
 gcp_config ()
 {
     PLAN_FILE=$SCRIPT_DIRECTORY/backend.tpl/gcp/bootstrap.local
-    echo -e "${OK}GCP${NC} - Region: ${INF}$CLOUD_REGION${NC}, Bucket: ${INF}$bucket${NC}, prefix: ${INF}$prefix${NC}"
+    echo -e "${OK}GCP${NC} - Region: ${INF}$CLOUD_REGION${NC}, Bucket: ${INF}$bucket${NC}, prefix: ${INF}$prefix${NC} project:  ${INF}$GCP_PROJECT_ID${NC}"
     terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/gcp init -reconfigure \
         -backend-config="bucket=$bucket" \
         -backend-config="prefix=bootstrap.gcp" &> /dev/null
