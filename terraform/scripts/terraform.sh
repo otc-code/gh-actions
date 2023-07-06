@@ -106,6 +106,7 @@ function plan(){
     terraform -chdir=$TF_DIR plan $TFVARS -input=false -out $TF_DIR/tf.plan
     echo -e "${OK}Summary${NC}: summary of $TF_DIR/tf.plan"
     cd $TF_DIR
+    pwd
     tf-summarize $TF_DIR/tf.plan
     gha_notice "Plan Summary" "`tf-summarize -md $TF_DIR/tf.plan`"
     hr
