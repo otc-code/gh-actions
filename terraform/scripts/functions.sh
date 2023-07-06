@@ -86,9 +86,9 @@ function gha_warn(){
 
 function gha_notice(){
     text=$2
-    text="${text//'%'/'%25'}"
-    text="${text//$'\n'/'%0A'}"
-    text="${text//$'\r'/'%0D'}"
+    # text="${text//'%'/'%25'}"
+    # text="${text//$'\n'/'%0A'}"
+    # text="${text//$'\r'/'%0D'}"
     if [[ ! -z "$GITHUB_EVENT_NAME" ]]; then echo "::notice title=$1::$text"; fi
 }
 
