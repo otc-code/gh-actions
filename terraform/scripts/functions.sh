@@ -39,7 +39,7 @@ tfvars(){
     if [[ -z "$TF_VARS_FILE" ]]; then
         echo -e "${INF}$TERRAFORM_ACTION - TFVARS_FILE${NC}: No TFVARS_FILE set!"
     else
-        echo -e "${OK}$TERRAFORM_ACTION - TFVARS_FILE${NC}: Customer $TF_VARS_FILE set!{NC}"
+        echo -e "${OK}$TERRAFORM_ACTION - TFVARS_FILE${NC}: Customer $TF_VARS_FILE set!"
         TFVARS="$TFVARS-var-file=$TF_VARS_FILE "
     fi
     if [[ -z "$OTC_TF_VARS_FILE" ]]; then
