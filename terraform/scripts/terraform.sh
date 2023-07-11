@@ -26,6 +26,7 @@ function fmt_check(){
         #junit_add_ok "format is ok."
     fi
 }
+
 function init(){
     git config --global credential.helper 'store'
     git config --global --add url."https://$GITHUB_TOKEN:x-oauth-basic@github".insteadOf ssh://git@github
@@ -46,6 +47,25 @@ function init(){
         echo -e "${OK}Terraform init:${NC} successful!"
     fi
 }
+
+function init_without_backend(){
+    git config --global credential.helper 'store'
+    git config --global --add url."https://$GITHUB_TOKEN:x-oauth-basic@github".insteadOf ssh://git@github
+    git config --global --add url."https://$GITHUB_TOKEN:x-oauth-basic@github".insteadOf https://github
+    git config --global --add url."https://$GITHUB_TOKEN:x-oauth-basic@github".insteadOf git@github
+    terraform -chdir=$TF_DIR init -backend=false
+
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        git config --global --unset-all url."https://$GITHUB_TOKEN:x-oauth-basic@github".insteadOf
+        echo -e "${ERR}Error: terraform init failed!${NC}"
+        echo -e "  ${ERR}Possibly missing GITHUB_TOKEN!${NC}"
+        exit 1
+    else
+        git config --global --unset-all url."https://$GITHUB_TOKEN:x-oauth-basic@github".insteadOf
+        echo -e "${OK}Terraform init:${NC} successful!"
+    fi
+}
+
 function validate(){
     terraform -chdir=$TF_DIR validate -json > tmp.local
     result=`jq '.valid' tmp.local`

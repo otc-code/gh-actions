@@ -27,22 +27,22 @@ gcp_config ()
         rpl 'backend "local" {}' 'backend "gcs" {}' $SCRIPT_DIRECTORY/backend.tpl/gcp/conf.tf &> /dev/null
         echo -e "${OK}${NC} Migrating state to backend."
         terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/gcp init -migrate-state -force-copy \
-                -backend-config="bucket=$bucket" \
-                -backend-config="prefix=bootstrap.gcp" &> /dev/null
+            -backend-config="bucket=$bucket" \
+            -backend-config="prefix=bootstrap.gcp" &> /dev/null
         echo -e "${OK}${NC} Refreshing backend state."
 
         echo yes|terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/gcp -refresh-only \
-                -var "cloud_region=$CLOUD_REGION" \
-                -var "gcp_project=$GCP_PROJECT_ID" \
-                -var "bucket_name=$bucket" &> /dev/null
+            -var "cloud_region=$CLOUD_REGION" \
+            -var "gcp_project=$GCP_PROJECT_ID" \
+            -var "bucket_name=$bucket" &> /dev/null
         rm $SCRIPT_DIRECTORY/backend.tpl/gcp/terraform.tfstate
     fi
 }
 
 gcp_config_destroy (){
     terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/gcp init -reconfigure \
-    -backend-config="bucket=$bucket" \
-    -backend-config="prefix=bootstrap.gcp" &> /dev/null
+        -backend-config="bucket=$bucket" \
+        -backend-config="prefix=bootstrap.gcp" &> /dev/null
     status=$?
 
     if [ $status -ne 0 ]; then
@@ -55,7 +55,7 @@ gcp_config_destroy (){
     terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/gcp init -migrate-state -force-copy &> /dev/null
     echo -e "${OK}${NC} terraform destroy"
     terraform -chdir=$SCRIPT_DIRECTORY/backend.tpl/gcp destroy --auto-approve \
-    -var "cloud_region=$CLOUD_REGION" \
-    -var "gcp_project=$GCP_PROJECT_ID" \
-    -var "bucket_name=$bucket" #&> /dev/null
+        -var "cloud_region=$CLOUD_REGION" \
+        -var "gcp_project=$GCP_PROJECT_ID" \
+        -var "bucket_name=$bucket" #&> /dev/null
 }
