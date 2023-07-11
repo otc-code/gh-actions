@@ -162,6 +162,33 @@ function apply(){
     gha_notice "terraform output `basename $TF_DIR`" "`terraform -chdir=$TF_DIR output -no-color`"
 }
 
+function plan_destroy(){
+    tfvars
+    echo -e "${OK}$TERRAFORM_ACTION${NC}: running terraform plan $TFVARS${NC}"
+    terraform -chdir=$TF_DIR plan $TFVARS -input=false -destroy -out $TF_DIR/tf.plan
+    terraform -chdir=$TF_DIR show -json $TF_DIR/tf.plan > $TF_DIR/tf.plan.json.local
+    echo -e "${OK}Summary${NC}: summary of $TF_DIR/tf.plan"
+    cat $TF_DIR/tf.plan.json.local | tf-summarize
+    cat $TF_DIR/tf.plan.json.local | tf-summarize -md >> $GITHUB_STEP_SUMMARY
+    hr
+    # We need to strip the single quotes that are wrapping it so we can parse it with JQ
+    plan=$(cat $TF_DIR/tf.plan.json.local | sed "s/^'//g" | sed "s/'$//g")
+    # Get the count of the number of resources being created
+    create=$(echo "$plan" | jq -r ".resource_changes[].change.actions[]" | grep "create" | wc -l | sed 's/^[[:space:]]*//g')
+    # Get the count of the number of resources being updated
+    update=$(echo "$plan" | jq -r ".resource_changes[].change.actions[]" | grep "update" | wc -l | sed 's/^[[:space:]]*//g')
+    # Get the count of the number of resources being deleted
+    delete=$(echo "$plan" | jq -r ".resource_changes[].change.actions[]" | grep "delete" | wc -l | sed 's/^[[:space:]]*//g')
+    echo -e "  * ${OK}Terraform plan:${NC} ${OK}$create to add${NC}, ${INF}$update to change${NC} and ${ERR}$delete to delete${NC}!"
+
+    if [ $delete -ne 0 ];  then
+        gha_warn "Deleted resources" "This plan will delete resources!"
+    fi
+
+
+    gha_notice "Terraform plan" "Terraform plan: $create to add, $update to change, $delete to destroy."
+}
+
 function create_backend(){
     get_backend_provider
     configure_backend_provider
