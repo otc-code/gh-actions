@@ -48,6 +48,12 @@ tfvars(){
         echo -e "${OK}$TERRAFORM_ACTION - OTC_TFVARS_FILE${NC}: OTC $OTC_TF_VARS_FILE set!${NC}"
         TFVARS="$TFVARS-var-file=$OTC_TF_VARS_FILE "
     fi
+    if [[ -z "$AUTO_TF_VARS_FILE" ]]; then
+        echo -e "${INF}$TERRAFORM_ACTION - AUTO_TF_VARS_FILE${NC}: No AUTO_TF_VARS_FILE set!${NC}"
+    else
+        echo -e "${OK}$TERRAFORM_ACTION - AUTO_TF_VARS_FILE${NC}: $AUTO_TF_VARS_FILE set!${NC}"
+        TFVARS="$TFVARS-var-file=$AUTO_TF_VARS_FILE "
+    fi
 }
 
 git_push(){

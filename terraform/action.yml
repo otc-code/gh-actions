@@ -10,13 +10,16 @@ inputs:
     required: true
   TERRAFORM_ACTION:
     description: 'Terraform Action to execute'
-    required: false  
+    required: false
     default: 'version'
   TF_VARS_FILE:
-    description: 'tfvars file'
+    description: 'Customer tfvars file'
     required: false
   OTC_TF_VARS_FILE:
-    description: 'tfvars file'
+    description: 'OTC tfvars file'
+    required: false
+  AUTO_TF_VARS_FILE:
+    description: 'Auto tfvars file'
     required: false
   CLOUD_REGION:
     description: 'AWS Region, Azure location, GCP location for deployment'
@@ -34,7 +37,7 @@ inputs:
     description: 'Destroy Backend'
     required: false
     default: 'false'
-    
+
 runs:
   using: "composite"
   steps:
@@ -49,9 +52,7 @@ runs:
         BACKEND_DESTROY: ${{ inputs.BACKEND_DESTROY }}
         TF_VARS_FILE: ${{ inputs.TF_VARS_FILE }}
         OTC_TF_VARS_FILE: ${{ inputs.OTC_TF_VARS_FILE }}
+        AUTO_TF_VARS_FILE: ${{ inputs.AUTO_TF_VARS_FILE }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
         CLOUD_REGION: ${{ inputs.CLOUD_REGION }}
         GCP_PROJECT_ID: ${{ inputs.GCP_PROJECT_ID }}
-
-
-
