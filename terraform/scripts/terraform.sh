@@ -191,8 +191,10 @@ function plan_destroy(){
     terraform -chdir=$TF_DIR plan $TFVARS -input=false -destroy -out $TF_DIR/tf.plan
     terraform -chdir=$TF_DIR show -json $TF_DIR/tf.plan > $TF_DIR/tf.plan.json.local
     echo -e "${OK}Summary${NC}: summary of $TF_DIR/tf.plan"
-    cat $TF_DIR/tf.plan.json.local | tf-summarize
     cat $TF_DIR/tf.plan.json.local | tf-summarize -md >> $GITHUB_STEP_SUMMARY
+    echo "PLAN_SUMMARY<<EOT" >> "$GITHUB_ENV"
+    echo "`cat $TF_DIR/tf.plan.json.local | tf-summarize -md`" >> "$GITHUB_ENV"
+    echo "EOT" >> "$GITHUB_ENV"
     hr
     # We need to strip the single quotes that are wrapping it so we can parse it with JQ
     plan=$(cat $TF_DIR/tf.plan.json.local | sed "s/^'//g" | sed "s/'$//g")
