@@ -127,7 +127,7 @@ function plan(){
     terraform -chdir=$TF_DIR show -json $TF_DIR/tf.plan > $TF_DIR/tf.plan.json.local
     echo -e "${OK}Summary${NC}: summary of $TF_DIR/tf.plan"
     cat $TF_DIR/tf.plan.json.local | tf-summarize -md >> $GITHUB_STEP_SUMMARY
-    echo "PLAN_SUMMARY=$GITHUB_STEP_SUMMARY" >> "$GITHUB_ENV"
+    echo "PLAN_SUMMARY=`cat $TF_DIR/tf.plan.json.local | tf-summarize`" >> "$GITHUB_ENV"
 
     hr
     # We need to strip the single quotes that are wrapping it so we can parse it with JQ
