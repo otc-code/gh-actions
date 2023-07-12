@@ -128,7 +128,7 @@ function plan(){
     echo -e "${OK}Summary${NC}: summary of $TF_DIR/tf.plan"
     cat $TF_DIR/tf.plan.json.local | tf-summarize -md >> $GITHUB_STEP_SUMMARY
     echo "PLAN_SUMMARY<<EOT" >> "$GITHUB_ENV"
-    echo "`cat $TF_DIR/tf.plan.json.local | tf-summarize`" >> "$GITHUB_ENV"
+    echo "`cat $TF_DIR/tf.plan.json.local | tf-summarize -md`" >> "$GITHUB_ENV"
     echo "EOT" >> "$GITHUB_ENV"
 
     hr
